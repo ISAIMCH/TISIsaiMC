@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Análisis de Ventas</title>
+    <link rel="stylesheet" href="../Style/styleInfoAnalisis.css">
+</head>
+<body>
+    <!-- Sección de Diagrama de Tablas -->
+    <section>
+        <h2>Diagrama de Tablas</h2>
+        <p>En este módulo no se han creado tablas adicionales, ya que todas las métricas y reportes necesarios se pueden calcular directamente a partir de las tablas existentes mediante consultas SQL o procesamiento en la programación. Operaciones como ticket promedio, ranking de productos, utilidad neta o clientes frecuentes se realizan usando SELECT, SUM, COUNT, AVG, GROUP BY, etc., y no requieren almacenar datos duplicados.</p>
+        <p>No es necesario crear tablas propias si los reportes son dinámicos y se calculan en tiempo real. Solo se considerarían tablas adicionales en caso de que se deseen guardar históricos, reportes pesados consultados frecuentemente o llevar un registro de auditoría. De esta manera, se mantiene la integridad de la información y se optimiza el rendimiento del sistema.</p>
+    </section>
+
+      <!-- Sección de Operaciones SQL -->
+    <section id="operaciones-sql">
+        <h2>Operaciones SQL del Módulo</h2>
+
+        <div class="sql-block">
+            <h3>1. Ventas por periodo</h3>
+            <p>Consulta que obtiene el total de ventas en un periodo específico, pudiendo ser día, semana, mes o año, para analizar ingresos en diferentes intervalos de tiempo.</p>
+            <pre>
+-- Ventas totales por día
+SELECT fecha, SUM(total) AS TotalVentas
+FROM Ventas
+WHERE fecha BETWEEN '2025-09-01' AND '2025-09-14'
+GROUP BY fecha
+ORDER BY fecha;
+
+-- Ventas totales por mes
+SELECT YEAR(fecha) AS Año, MONTH(fecha) AS Mes, SUM(total) AS TotalVentas
+FROM Ventas
+GROUP BY YEAR(fecha), MONTH(fecha)
+ORDER BY Año, Mes;
+            </pre>
+        </div>
+
+        <div class="sql-block">
+            <h3>2. Ticket promedio</h3>
+            <p>Calcula el promedio de venta por transacción en un periodo, lo que permite conocer el gasto promedio de los clientes.</p>
+            <pre>
+SELECT SUM(total) / COUNT(*) AS TicketPromedio
+FROM Ventas
+WHERE fecha BETWEEN '2025-09-01' AND '2025-09-14';
+            </pre>
+        </div>
+
+        <div class="sql-block">
+            <h3>3. Ranking de productos</h3>
+            <p>Muestra cuáles productos se venden más, ordenándolos de mayor a menor cantidad de veces vendidos, útil para tomar decisiones de inventario y promociones.</p>
+            <pre>
+SELECT DV.idProducto, P.nombreProducto, COUNT(*) AS VecesVendido
+FROM DetalleVenta DV
+JOIN Producto P ON DV.idProducto = P.idProducto
+GROUP BY DV.idProducto, P.nombreProducto
+ORDER BY VecesVendido DESC;
+            </pre>
+        </div>
+
+        <div class="sql-block">
+            <h3>4. Horarios con más afluencia</h3>
+            <p>Identifica los intervalos horarios con mayor número de ventas para analizar picos de afluencia y optimizar la atención al cliente.</p>
+            <pre>
+SELECT 
+    CASE 
+        WHEN HOUR(fecha) BETWEEN 8 AND 9 THEN '8-10am'
+        WHEN HOUR(fecha) BETWEEN 10 AND 11 THEN '10-12am'
+        WHEN HOUR(fecha) BETWEEN 12 AND 13 THEN '12-2pm'
+        ELSE 'Otros horarios'
+    END AS IntervaloHora,
+    COUNT(*) AS CantidadVentas
+FROM Ventas
+GROUP BY IntervaloHora
+ORDER BY CantidadVentas DESC;
+            </pre>
+        </div>
+
+        <div class="sql-block">
+            <h3>5. Empleados con más ventas</h3>
+            <p>Calcula los ingresos generados por cada empleado, identificando quién realiza más ventas o genera más ingresos.</p>
+            <pre>
+SELECT E.idEmpleado, E.nombre, SUM(V.total) AS TotalGenerado
+FROM Ventas V
+JOIN Empleado E ON V.idEmpleado = E.idEmpleado
+GROUP BY E.idEmpleado, E.nombre
+ORDER BY TotalGenerado DESC;
+            </pre>
+        </div>
+
+        <div class="sql-block">
+            <h3>6. Clientes frecuentes</h3>
+            <p>Cuenta la cantidad de compras por cliente y los ordena de mayor a menor, permitiendo identificar a los clientes más leales.</p>
+            <pre>
+SELECT C.idCliente, C.nombre, COUNT(*) AS ComprasRealizadas
+FROM Ventas V
+JOIN Cliente C ON V.idCliente = C.idCliente
+GROUP BY C.idCliente, C.nombre
+ORDER BY ComprasRealizadas DESC;
+            </pre>
+        </div>
+
+        <div class="sql-block">
+            <h3>7. Utilidad neta</h3>
+            <p>Calcula la diferencia entre los ingresos por ventas y el costo de los productos vendidos para obtener la utilidad neta en un periodo.</p>
+            <pre>
+SELECT SUM(V.total) - SUM(DV.cantidad * P.precioCosto) AS UtilidadNeta
+FROM Ventas V
+JOIN DetalleVenta DV ON V.idVenta = DV.idVenta
+JOIN Producto P ON DV.idProducto = P.idProducto
+WHERE V.fecha BETWEEN '2025-09-01' AND '2025-09-14';
+            </pre>
+        </div>
+
+        <div class="sql-block">
+            <h3>8. Efectividad de promociones</h3>
+            <p>Compara las ventas realizadas con promociones activas contra las ventas normales, evaluando el impacto de las promociones en los ingresos.</p>
+            <pre>
+SELECT 
+    P.nombrePromocion,
+    SUM(V.total) AS VentasConPromocion
+FROM Ventas V
+JOIN DetalleVenta DV ON V.idVenta = DV.idVenta
+JOIN Promociones P ON DV.idPromocion = P.idPromocion
+WHERE P.activa = 1
+GROUP BY P.nombrePromocion
+ORDER BY VentasConPromocion DESC;
+            </pre>
+        </div>
+    </section>
+</body>
+</html>

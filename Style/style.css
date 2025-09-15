@@ -1,0 +1,112 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Encabezado */
+header {
+  background: #444459;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Secciones */
+section {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+section h2 {
+  color: #444459;
+  margin-bottom: 15px;
+}
+
+/* Imagen de subsistemas */
+#subsistemas img {
+  display: block;
+  margin: 20px auto;
+  max-width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Botones de módulos */
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn {
+  text-decoration: none;
+  background: #444459;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #5757c4;
+}
+
+/* Galería de integrantes */
+.galeria {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(60, 60, 140, 0.85);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease-in-out;
+}
+
+.card:hover .info {
+  transform: translateY(0);
+}
+
+/* Footer */
+footer {
+  background: #444459;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}

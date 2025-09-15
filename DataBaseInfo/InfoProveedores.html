@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subsistema de Proveedores</title>
+    <link rel="stylesheet" href="../Style/styleInfoAnalisis.css">
+</head>
+<body>
+    <h1>Diseño de la base de datos del subsistema de Proveedores</h1>
+
+    <section>
+        <h2>Diagrama de la base de datos</h2>
+        <img src="./../assets/Proveedores.png" alt="Diagrama de la base de datos de Proveedores">
+    </section>
+
+    <section>
+        <h2>Tabla Proveedor</h2>
+        <h3>Propósito</h3>
+        <p>La tabla Proveedor almacena información detallada de cada proveedor del sistema, incluyendo datos de contacto, ubicación y tipo de proveedor. Esta información es esencial para gestionar relaciones comerciales y controlar la cadena de suministro.</p>
+        
+        <h3>Campos</h3>
+        <ul>
+            <li>ID_Proveedor: Clave primaria única que identifica a cada proveedor.</li>
+            <li>Nombre, SegundoNombre, ApellidoP y ApellidoM: Permiten un registro completo del nombre del proveedor.</li>
+            <li>Telefono y Correo: Datos de contacto obligatorios para comunicación directa.</li>
+            <li>Calle, Colonia, CP, Ciudad, Estado, Pais: Campos que permiten almacenar la dirección completa del proveedor.</li>
+            <li>TipoProveedor: Indica el tipo o categoría del proveedor.</li>
+            <li>RFC_NIT: Identificación fiscal obligatoria para gestión legal y administrativa.</li>
+            <li>Estatus: Indica si el proveedor está activo o inactivo.</li>
+            <li>FechaRegistro: Fecha en que se dio de alta al proveedor, útil para auditorías y control histórico.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Tabla ProveedorIngrediente</h2>
+        <h3>Propósito</h3>
+        <p>La tabla ProveedorIngrediente permite identificar fácilmente qué proveedor nos vende cada ingrediente, lo que facilita la trazabilidad de productos, la gestión de compras y el control de inventario.</p>
+        
+        <h3>Campos</h3>
+        <ul>
+            <li>ID_ProveedorIngrediente: Clave primaria única de la relación.</li>
+            <li>ID_Proveedor: Clave foránea que referencia al proveedor correspondiente.</li>
+            <li>ID_Ingrediente: Clave foránea que referencia al ingrediente suministrado.</li>
+            <li>Cantidad: Cantidad disponible del ingrediente proporcionada por el proveedor.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Normalización de la Base de Datos</h2>
+        <p>Se han seguido las primeras tres formas normales (1NF, 2NF, 3NF) para asegurar consistencia y evitar redundancias:</p>
+
+        <h3>1NF (Primera Forma Normal)</h3>
+        <p>Todos los campos son atómicos y cada tabla tiene una clave primaria única.</p>
+
+        <h3>2NF (Segunda Forma Normal)</h3>
+        <p>Todos los atributos dependen completamente de la clave primaria, evitando dependencias parciales.</p>
+
+        <h3>3NF (Tercera Forma Normal)</h3>
+        <p>No existen dependencias transitivas; cada atributo no clave depende únicamente de la clave primaria.</p>
+    </section>
+
+    <section>
+        <h2>Código SQL para crear tablas</h2>
+        <div class="sql-block">
+<pre><code>
+CREATE TABLE Proveedor ( 
+    ID_Proveedor INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100) NOT NULL,
+    SegundoNombre NVARCHAR(100),
+    ApellidoP NVARCHAR(100) NOT NULL,
+    ApellidoM NVARCHAR(100),
+    Telefono NVARCHAR(20) NOT NULL,
+    Correo NVARCHAR(100),
+    Calle NVARCHAR(200),
+    Colonia NVARCHAR(100),
+    CP NVARCHAR(10),
+    Ciudad NVARCHAR(100),
+    Estado NVARCHAR(100),
+    Pais NVARCHAR(50),
+    TipoProveedor NVARCHAR(50),
+    RFC_NIT NVARCHAR(20) NOT NULL,
+    Estatus NVARCHAR(10) DEFAULT 'Activo',
+    FechaRegistro DATE DEFAULT GETDATE()
+);
+
+CREATE TABLE ProveedorIngrediente (
+    ID_ProveedorIngrediente INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Proveedor INT NOT NULL FOREIGN KEY REFERENCES Proveedor(ID_Proveedor),
+    ID_Ingrediente INT NOT NULL,
+    Cantidad DECIMAL(10,2) DEFAULT 0
+);
+</code></pre>
+        </div>
+    </section>
+
+</body>
+</html>
