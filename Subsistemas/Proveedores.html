@@ -45,14 +45,13 @@
             <h3>Administrador</h3>
             <ul>
                 <li>Registrar proveedores nuevos y actualizar datos de proveedores existentes.</li>
-                <li>Consultar proveedores por tipo, estatus, ciudad o ingredientes suministrados.</li>
+                <li>Consultar proveedores por estatus, ciudad o ingredientes suministrados.</li>
             </ul>
 
             <h3>Empleado</h3>
             <ul>
                 <li>Consultar proveedores activos con su información de contacto.</li>
                 <li>Verificar qué proveedor suministra determinado ingrediente o producto (mediante la tabla ProveedorIngrediente).</li>
-                <li>Revisar plazos de entrega y disponibilidad de ingredientes según el proveedor.</li>
             </ul>
         </section>
 
@@ -64,7 +63,7 @@
                 <li><strong>Actualizar proveedor:</strong> Modificar información existente (teléfono, correo, dirección, estatus).</li>
                 <li><strong>Eliminar o desactivar proveedor:</strong> Cambiar el estatus a Inactivo si ya no se trabaja con él.</li>
                 <li><strong>Vincular proveedor con ingredientes:</strong> Registrar qué ingredientes vende cada proveedor para facilitar compras.</li>
-                <li><strong>Consultar proveedores:</strong> Listar proveedores y filtrar por tipo, estatus, ciudad o ingredientes que suministran.</li>
+                <li><strong>Consultar proveedores:</strong> Listar proveedores y filtrar por estatus, ciudad o ingredientes que suministran.</li>
                 <li><strong>Buscar proveedor:</strong> Localizar rápidamente un proveedor por nombre, RFC, ciudad o producto suministrado.</li>
             </ul>
         </section>
@@ -73,9 +72,9 @@
         <section>
             <h2>Operaciones CRUD</h2>
             <ul>
-                <li><strong>Create:</strong> Agregar nuevos proveedores y registrar ingredientes que venden (tabla ProveedorIngrediente).</li>
-                <li><strong>Read:</strong> Consultar información de proveedores y qué ingredientes suministran.</li>
-                <li><strong>Update:</strong> Modificar datos de proveedores y actualizar lista de ingredientes asociados.</li>
+                <li><strong>Create:</strong> Agregar nuevos proveedores y registrar ingredientes que venden (tabla ProveedorIngrediente). La dirección se almacena en la tabla <strong>Direccion</strong>.</li>
+                <li><strong>Read:</strong> Consultar información de proveedores, direcciones y qué ingredientes suministran.</li>
+                <li><strong>Update:</strong> Modificar datos de proveedores, actualizar dirección y lista de ingredientes asociados.</li>
                 <li><strong>Delete / Desactivar:</strong> Desactivar proveedores manteniendo el historial de ingredientes que solían vender.</li>
             </ul>
         </section>
@@ -84,8 +83,9 @@
         <section>
             <h2>Diagrama de Tablas</h2>
             <p>
-                El modelo incluye la tabla <strong>Proveedor</strong> (información general del proveedor) y la tabla 
-                <strong>ProveedorIngrediente</strong> (que permite identificar qué proveedor vende qué ingrediente).
+                El modelo incluye la tabla <strong>Proveedor</strong> (información general del proveedor), 
+                la tabla <strong>Direccion</strong> (información de ubicación del proveedor) 
+                y la tabla <strong>ProveedorIngrediente</strong> (que permite identificar qué proveedor vende qué ingrediente).
             </p>
             <a href="../DataBaseInfo/InfoProveedores.html">
                 <button type="button">Ver Operaciones SQL</button>
@@ -101,6 +101,5 @@
         </section>
 
     </main>
-    
 </body>
 </html>
