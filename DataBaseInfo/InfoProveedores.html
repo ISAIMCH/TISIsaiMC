@@ -61,9 +61,10 @@
     </section>
 
     <section>
-        <h2>Código SQL para crear tablas</h2>
         <div class="sql-block">
-<pre><code>
+            <h3>Código SQL para crear tablas<</h3>
+            <p>-</p>
+            <pre>
 CREATE TABLE Proveedor ( 
     ID_Proveedor INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(100) NOT NULL,
@@ -90,9 +91,53 @@ CREATE TABLE ProveedorIngrediente (
     ID_Ingrediente INT NOT NULL,
     Cantidad DECIMAL(10,2) DEFAULT 0
 );
-</code></pre>
+</pre>
         </div>
-    </section>
+</section>
+
+
+    <section>
+        <div class="sql-block">
+            <h3>Codigo SQL para agregar registros</h3>
+            <p>-</p>
+            <pre>
+-- =======================
+-- Inserción en Proveedor
+-- =======================
+INSERT INTO Proveedor (Nombre, SegundoNombre, ApellidoP, ApellidoM, Telefono, Correo, Calle, Colonia, CP, Ciudad, Estado, Pais, TipoProveedor, RFC_NIT, Estatus)
+VALUES
+('Juan', 'Carlos', 'Pérez', 'López', '5551234567', 'juan.perez@email.com', 'Av. Reforma 123', 'Centro', '06000', 'Ciudad de México', 'CDMX', 'México', 'Café', 'JPL890123AB1', 'Activo'),
+('María', NULL, 'García', 'Hernández', '5552345678', 'maria.garcia@email.com', 'Calle Hidalgo 45', 'Roma', '06700', 'Ciudad de México', 'CDMX', 'México', 'Lácteos', 'MGH900321CD2', 'Activo'),
+('Pedro', 'Luis', 'Ramírez', 'Torres', '5553456789', 'pedro.ramirez@email.com', 'Av. Juárez 789', 'Del Valle', '03100', 'Ciudad de México', 'CDMX', 'México', 'Panadería', 'PLR850712EF3', 'Activo'),
+('Laura', 'Fernanda', 'Martínez', 'Sánchez', '5554567890', 'laura.martinez@email.com', 'Calle Morelos 34', 'Condesa', '06140', 'Ciudad de México', 'CDMX', 'México', 'Frutas', 'LMS920615GH4', 'Activo'),
+('José', NULL, 'Hernández', 'Morales', '5555678901', 'jose.hernandez@email.com', 'Av. Universidad 120', 'Coyoacán', '04000', 'Ciudad de México', 'CDMX', 'México', 'Verduras', 'JHM800101IJ5', 'Activo'),
+('Ana', 'Lucía', 'Torres', 'Ramírez', '5556789012', 'ana.torres@email.com', 'Calle Allende 87', 'San Ángel', '01000', 'Ciudad de México', 'CDMX', 'México', 'Dulces', 'ALT950921KL6', 'Activo'),
+('Miguel', 'Ángel', 'Flores', 'Pineda', '5557890123', 'miguel.flores@email.com', 'Calle Zaragoza 56', 'Tlalpan', '14000', 'Ciudad de México', 'CDMX', 'México', 'Café', 'MAF830305MN7', 'Activo'),
+('Carmen', NULL, 'Reyes', 'Castillo', '5558901234', 'carmen.reyes@email.com', 'Av. Central 90', 'Iztapalapa', '09200', 'Ciudad de México', 'CDMX', 'México', 'Panadería', 'CRC780824OP8', 'Activo'),
+('Andrés', 'Felipe', 'Mendoza', 'Gómez', '5559012345', 'andres.mendoza@email.com', 'Calle Independencia 23', 'Nápoles', '03810', 'Ciudad de México', 'CDMX', 'México', 'Frutas', 'AFM860417QR9', 'Activo'),
+('Sofía', 'Isabel', 'Ortiz', 'Luna', '5550123456', 'sofia.ortiz@email.com', 'Calle Reforma 300', 'Polanco', '11560', 'Ciudad de México', 'CDMX', 'México', 'Lácteos', 'SIL990122ST0', 'Activo');
+
+
+-- ==============================
+-- Inserción en ProveedorIngrediente
+-- ==============================
+-- Suponemos que los ingredientes con ID 1 al 10 existen en la tabla Ingrediente
+INSERT INTO ProveedorIngrediente (ID_Proveedor, ID_Ingrediente, Cantidad)
+VALUES
+(1, 1, 100.50),
+(2, 2, 200.00),
+(3, 3, 150.75),
+(4, 4, 300.00),
+(5, 5, 250.25),
+(6, 6, 180.00),
+(7, 7, 90.00),
+(8, 8, 120.50),
+(9, 9, 500.00),
+(10, 10, 75.00);
+    </pre>
+        </div>
+</section>
+
 
 </body>
 </html>

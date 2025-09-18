@@ -112,22 +112,165 @@ JOIN Producto P ON DV.idProducto = P.idProducto
 WHERE V.fecha BETWEEN '2025-09-01' AND '2025-09-14';
             </pre>
         </div>
+    </section>
 
+
+    <!-- Sección de Ejemplos SQL -->
+    <section>
         <div class="sql-block">
-            <h3>8. Efectividad de promociones</h3>
-            <p>Compara las ventas realizadas con promociones activas contra las ventas normales, evaluando el impacto de las promociones en los ingresos.</p>
+            <h3>EJEPLO DE TABLAS EN OTRO MODULOS</h3>
+            <p>-</p>
             <pre>
-SELECT 
-    P.nombrePromocion,
-    SUM(V.total) AS VentasConPromocion
-FROM Ventas V
-JOIN DetalleVenta DV ON V.idVenta = DV.idVenta
-JOIN Promociones P ON DV.idPromocion = P.idPromocion
-WHERE P.activa = 1
-GROUP BY P.nombrePromocion
-ORDER BY VentasConPromocion DESC;
+CREATE DATABASE ANALISIS_DE_VENTAS
+
+CREATE TABLE Empleado (
+    ID_Empleado INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100) NOT NULL,
+    ApellidoP NVARCHAR(100) NOT NULL,
+    ApellidoM NVARCHAR(100),
+    Usuario NVARCHAR(50) UNIQUE NOT NULL,
+    Contrasena NVARCHAR(100) NOT NULL,
+    Rol NVARCHAR(50) NOT NULL,
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Cliente (
+    ID_Cliente INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100) NOT NULL,
+    ApellidoP NVARCHAR(100) NOT NULL,
+    ApellidoM NVARCHAR(100),
+    Telefono NVARCHAR(20),
+    Correo NVARCHAR(100),
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Producto (
+    ID_Producto INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100) NOT NULL,
+    Descripcion NVARCHAR(200),
+    Precio DECIMAL(10,2) NOT NULL,
+    PrecioCosto DECIMAL(10,2) NOT NULL, -- agregado para cálculo de utilidad neta
+    Stock INT NOT NULL,
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Venta (
+    ID_Venta INT IDENTITY(1,1) PRIMARY KEY,
+    Fecha DATETIME DEFAULT GETDATE(),
+    Total DECIMAL(10,2) NOT NULL,
+    ID_Empleado INT NOT NULL,
+    ID_Cliente INT NULL,
+    CONSTRAINT FK_Venta_Empleado FOREIGN KEY (ID_Empleado) REFERENCES Empleado(ID_Empleado),
+    CONSTRAINT FK_Venta_Cliente FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
+);
+
+CREATE TABLE DetalleVenta (
+    ID_DetalleVenta INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Venta INT NOT NULL,
+    ID_Producto INT NOT NULL,
+    Cantidad INT NOT NULL,
+    PrecioUnitario DECIMAL(10,2) NOT NULL,
+    ID_Promocion INT NULL, -- relación con promociones
+    Subtotal AS (Cantidad * PrecioUnitario) PERSISTED,
+    CONSTRAINT FK_DetalleVenta_Venta FOREIGN KEY (ID_Venta) REFERENCES Venta(ID_Venta),
+    CONSTRAINT FK_DetalleVenta_Producto FOREIGN KEY (ID_Producto) REFERENCES Producto(ID_Producto)
+);
+
             </pre>
         </div>
+</section>
+
+<!-- Sección de Registros SQL -->
+
+    <section>
+        <div class="sql-block">
+            <h3>Codigo SQL para agregar registros</h3>
+            <p>-</p>
+            <pre>
+
+-- ========================
+-- 1. Empleados
+-- ========================
+INSERT INTO Empleado (Nombre, ApellidoP, ApellidoM, Usuario, Contrasena, Rol)
+VALUES
+('Carlos', 'Ramírez', 'López', 'carlosr', '1234', 'Administrador'),
+('María', 'Gómez', 'Hernández', 'mariag', '1234', 'Vendedor'),
+('Juan', 'Pérez', 'Martínez', 'juanp', '1234', 'Vendedor'),
+('Ana', 'Torres', 'Jiménez', 'anat', '1234', 'Vendedor'),
+('Luis', 'Flores', 'Cruz', 'luisf', '1234', 'Administrador'),
+('Paola', 'Reyes', 'García', 'paolar', '1234', 'Vendedor'),
+('Miguel', 'Díaz', 'Morales', 'migueld', '1234', 'Vendedor'),
+('Fernanda', 'Vargas', 'Santos', 'fernandav', '1234', 'Vendedor'),
+('Roberto', 'Mendoza', 'Castillo', 'robertom', '1234', 'Administrador'),
+('Sofía', 'Navarro', 'Rojas', 'sofian', '1234', 'Vendedor');
+
+-- ========================
+-- 2. Clientes
+-- ========================
+INSERT INTO Cliente (Nombre, ApellidoP, ApellidoM, Telefono, Correo)
+VALUES
+('Alejandro', 'Santos', 'Rivas', '5551112222', 'alejandro@mail.com'),
+('Beatriz', 'López', 'Moreno', '5553334444', 'beatriz@mail.com'),
+('Carmen', 'Hernández', 'Pérez', '5555556666', 'carmen@mail.com'),
+('Daniel', 'Gómez', 'Cruz', '5557778888', 'daniel@mail.com'),
+('Elena', 'Martínez', 'Vega', '5559990000', 'elena@mail.com'),
+('Felipe', 'Jiménez', 'Reyes', '5551212121', 'felipe@mail.com'),
+('Gabriela', 'Navarro', 'Sosa', '5553434343', 'gabriela@mail.com'),
+('Héctor', 'Ramírez', 'Torres', '5555656565', 'hector@mail.com'),
+('Isabel', 'Díaz', 'Morales', '5557878787', 'isabel@mail.com'),
+('Jorge', 'Vargas', 'Santos', '5559090909', 'jorge@mail.com');
+
+-- ========================
+-- 3. Productos
+-- ========================
+INSERT INTO Producto (Nombre, Descripcion, Precio, PrecioCosto, Stock)
+VALUES
+('Café Americano', 'Taza de café negro', 25.00, 10.00, 200),
+('Capuchino', 'Café con leche y espuma', 35.00, 15.00, 150),
+('Latte', 'Café espresso con leche', 40.00, 18.00, 100),
+('Mocha', 'Café con chocolate', 45.00, 20.00, 120),
+('Té Verde', 'Infusión de té verde', 20.00, 8.00, 180),
+('Té Negro', 'Infusión de té negro', 22.00, 9.00, 170),
+('Panqué', 'Panqué de vainilla', 30.00, 12.00, 90),
+('Croissant', 'Pan de mantequilla', 28.00, 11.00, 80),
+('Galleta', 'Galleta de chocolate', 15.00, 6.00, 250),
+('Pastel de Queso', 'Rebanada de cheesecake', 50.00, 22.00, 70);
+
+-- ========================
+-- 4. Ventas
+-- ========================
+INSERT INTO Venta (Fecha, Total, ID_Empleado, ID_Cliente)
+VALUES
+('2025-09-01 09:15', 50.00, 1, 1),
+('2025-09-01 10:30', 70.00, 2, 2),
+('2025-09-02 11:00', 45.00, 3, 3),
+('2025-09-02 14:10', 90.00, 4, 4),
+('2025-09-03 12:45', 120.00, 5, 5),
+('2025-09-04 09:20', 60.00, 6, 6),
+('2025-09-05 16:00', 85.00, 7, 7),
+('2025-09-06 18:15', 100.00, 8, 8),
+('2025-09-07 08:30', 55.00, 9, 9),
+('2025-09-07 11:45', 75.00, 10, 10);
+
+-- ========================
+-- 5. DetalleVenta
+-- ========================
+INSERT INTO DetalleVenta (ID_Venta, ID_Producto, Cantidad, PrecioUnitario, ID_Promocion)
+VALUES
+(1, 1, 2, 25.00, 1),   -- Café Americano
+(2, 2, 2, 35.00, 2),   -- Capuchino
+(3, 3, 1, 40.00, 0),   -- Latte
+(4, 4, 2, 45.00, 9),   -- Mocha
+(5, 5, 3, 20.00, 5),   -- Té Verde
+(6, 6, 2, 22.00, 0),   -- Té Negro
+(7, 7, 2, 30.00, 0),   -- Panqué
+(8, 8, 2, 28.00, 6),   -- Croissant
+(9, 9, 3, 15.00, 8),   -- Galleta
+(10, 10, 1, 50.00, 3); -- Pastel de Queso  
+            </pre>
+        </div>
+
     </section>
+
 </body>
 </html>
