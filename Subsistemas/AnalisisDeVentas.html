@@ -38,6 +38,7 @@
                 <li>Consultar ventas totales por periodo (día, semana, mes o año).</li>
                 <li>Obtener ticket promedio y utilidad neta.</li>
                 <li>Revisar días y meses con mayores ventas dentro del periodo.</li>
+                <li>Escribir feha de inicio y fin que tendra el reporte.</li>
             </ul>
 
             <h3>Administrador</h3>
@@ -46,11 +47,13 @@
                 <li>Detectar horarios con mayor afluencia de ventas.</li>
                 <li>Identificar empleados con más ventas.</li>
                 <li>Monitorear clientes frecuentes.</li>
+                <li>Escribir feha de inicio y fin que tendra el reporte.</li>
             </ul>
 
             <h3>Empleado</h3>
             <ul>
                 <li>Revisar su historial de ventas y compararlo con periodos anteriores.</li>
+                <li>Escribir feha de inicio y fin que tendra el reporte.</li>
             </ul>
         </section>
 
@@ -90,13 +93,22 @@
 
         <!-- CRUD usado -->
         <section>
-            <h2>Operaciones CRUD utilizadas</h2>
-            <p>
-                Este módulo se centra en la <strong>consulta</strong> de información. Se utiliza principalmente el <strong>Read (Consultar)</strong> 
-                para obtener datos de las tablas <em>Analisis</em>, <em>ProductosMasVendidos</em>, <em>HorariosPico</em>, <em>EmpleadosMasVentas</em>, 
-                <em>ClientesFrecuentes</em>, <em>DiasConMasVentas</em> y <em>MesesConMasVentas</em>.
-            </p>
-        </section>
+    <h2>Operaciones CRUD utilizadas</h2>
+    <p>
+        Este módulo utiliza principalmente las operaciones de <strong>Create (Crear/Insertar)</strong> y 
+        <strong>Read (Consultar)</strong>. 
+    </p>
+    <ul>
+        <li>
+            <strong>Create:</strong> se aplica al registrar un nuevo análisis de ventas en la tabla 
+            <em>Analisis</em>, incluyendo las fechas de inicio y fin
+        </li>
+        <li>
+            <strong>Read:</strong> se utiliza para consultar los reportes y métricas de dichas tablas.
+        </li>
+    </ul>
+</section>
+
 
         <!-- Imagen de modelo/tablas -->
         <section>
