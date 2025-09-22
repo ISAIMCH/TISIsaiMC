@@ -13,7 +13,9 @@
         <section>
             <h1>Análisis de Ventas</h1>
             <p>
-                El módulo de Análisis de Ventas permite al propietario y a los administradores obtener información detallada sobre el comportamiento de las ventas en diferentes periodos de tiempo, transformando los datos de las transacciones en información útil para la toma de decisiones estratégicas, mediante un sistema que procesa y presenta los datos de manera clara y analítica para facilitar su interpretación y análisis.
+                El módulo de Análisis de Ventas permite al propietario y a los administradores obtener información detallada sobre el comportamiento de las ventas en diferentes periodos de tiempo. 
+                El sistema transforma los datos de las transacciones en información útil para la toma de decisiones estratégicas. 
+                Se procesan los registros de ventas, productos, empleados y clientes, y se presentan métricas como ventas totales, ticket promedio, utilidad neta, productos más vendidos, horarios pico, empleados con más ventas, clientes frecuentes, además de los días y meses con mayor volumen de ventas dentro de un periodo.
             </p>
         </section>
 
@@ -21,9 +23,9 @@
         <section>
             <h2>Usuarios del Subsistema</h2>
             <ul>
-                <li><strong>Propietario:</strong> Accede a todos los reportes, comparaciones y métricas.</li>
-                <li><strong>Administrador:</strong> Consulta reportes y métricas generales para gestionar el negocio.</li>
-                <li><strong>Empleado:</strong> Puede visualizar métricas básicas relacionadas a su desempeño.</li>
+                <li><strong>Propietario:</strong> Accede a todos los reportes y métricas del módulo.</li>
+                <li><strong>Administrador:</strong> Consulta reportes de productos, horarios, clientes frecuentes, días y meses con más ventas.</li>
+                <li><strong>Empleado:</strong> Visualiza métricas relacionadas a su desempeño individual.</li>
             </ul>
         </section>
 
@@ -33,107 +35,83 @@
 
             <h3>Propietario</h3>
             <ul>
-                <li>Visualizar reportes completos de ventas por día, semana, mes o año.</li>
-                <li>Obtener el ticket promedio de ventas en un periodo definido.</li>
-                <li>Conocer la utilidad neta por periodos.</li>
+                <li>Consultar ventas totales por periodo (día, semana, mes o año).</li>
+                <li>Obtener ticket promedio y utilidad neta.</li>
+                <li>Revisar días y meses con mayores ventas dentro del periodo.</li>
             </ul>
 
             <h3>Administrador</h3>
             <ul>
                 <li>Consultar ranking de productos más vendidos.</li>
-                <li>Detectar horarios de mayor afluencia.</li>
-                <li>Identificar a los empleados con más ventas realizadas.</li>
-                <li>Monitorear clientes frecuentes y su comportamiento de compra.</li>
+                <li>Detectar horarios con mayor afluencia de ventas.</li>
+                <li>Identificar empleados con más ventas.</li>
+                <li>Monitorear clientes frecuentes.</li>
             </ul>
 
             <h3>Empleado</h3>
             <ul>
-                <li>Revisar su propio historial de ventas.</li>
-                <li>Comparar su desempeño con periodos anteriores.</li>
+                <li>Revisar su historial de ventas y compararlo con periodos anteriores.</li>
             </ul>
         </section>
 
         <!-- Funciones principales -->
-<section class="card">
-    <h2>Funciones del Módulo</h2>
-    <ul>
-        <li>
-            <strong>Ventas por periodo:</strong> 
-            Consultar los registros de la tabla <em>Ventas</em>, filtrados por fecha 
-            (día, semana, mes o año) y sumar los importes totales.
-        </li>
-        <li>
-            <strong>Ticket promedio:</strong> 
-            Calcular el total de las ventas en un periodo y dividirlo entre la cantidad de transacciones. 
-            (Promedio = SUM(importe) / COUNT(ventas)).
-        </li>
-        <li>
-            <strong>Ranking de productos:</strong> 
-            Contar cuántas veces aparece cada producto en la tabla <em>DetalleVenta</em>, 
-            agrupando por producto y ordenando de mayor a menor.
-        </li>
-        <li>
-            <strong>Horarios con más afluencia:</strong> 
-            Extraer la hora de cada venta en la tabla <em>Ventas</em> y agrupar por intervalos 
-            (ej. 8-10am, 10-12pm) para identificar picos de ventas.
-        </li>
-        <li>
-            <strong>Empleados con más ventas:</strong> 
-            Agrupar las ventas por empleado (campo <em>idEmpleado</em> en <em>Ventas</em>) y sumar 
-            los importes, mostrando quién generó más ingresos.
-        </li>
-        <li>
-            <strong>Clientes frecuentes:</strong> 
-            Contar la cantidad de compras por cliente usando la tabla <em>Ventas</em> y ordenarlos 
-            de mayor a menor.
-        </li>
-        <li>
-            <strong>Utilidad neta:</strong> 
-            Calcular los ingresos (SUM de <em>Ventas</em>) y restar el costo de los productos 
-            (precioCosto de <em>Producto</em> multiplicado por cantidad en <em>DetalleVenta</em>).
-        </li>
-    </ul>
-</section>
-
+        <section class="card">
+            <h2>Funciones del Módulo</h2>
+            <ul>
+                <li>
+                    <strong>Ventas totales:</strong> Consultar registros de la tabla <em>Analisis</em> (campos <em>FechaInicio</em>, <em>FechaFin</em> y <em>TotalVentas</em>).
+                </li>
+                <li>
+                    <strong>Ticket promedio:</strong> Obtener el valor del campo <em>TicketPromedio</em> de la tabla <em>Analisis</em>.
+                </li>
+                <li>
+                    <strong>Utilidad neta:</strong> Consultar el campo <em>UtilidadNeta</em> en la tabla <em>Analisis</em>.
+                </li>
+                <li>
+                    <strong>Productos más vendidos:</strong> Consultar la tabla <em>ProductosMasVendidos</em>, agrupando por <em>ID_Producto</em> y sumando <em>CantidadVendida</em>.
+                </li>
+                <li>
+                    <strong>Horarios pico:</strong> Analizar la tabla <em>HorariosPico</em>, usando <em>Intervalo</em> y <em>CantidadVentas</em> para identificar picos.
+                </li>
+                <li>
+                    <strong>Empleados con más ventas:</strong> Consultar la tabla <em>EmpleadosMasVentas</em> y sumar <em>TotalGenerado</em> por empleado.
+                </li>
+                <li>
+                    <strong>Clientes frecuentes:</strong> Revisar la tabla <em>ClientesFrecuentes</em> y contar <em>ComprasRealizadas</em> por cliente.
+                </li>
+                <li>
+                    <strong>Días con más ventas:</strong> Consultar la tabla <em>DiasConMasVentas</em>, verificando el campo <em>Fecha</em> y <em>TotalVentas</em>.
+                </li>
+                <li>
+                    <strong>Meses con más ventas:</strong> Revisar la tabla <em>MesesConMasVentas</em> y analizar los campos <em>Año</em>, <em>Mes</em> y <em>TotalVentas</em>.
+                </li>
+            </ul>
+        </section>
 
         <!-- CRUD usado -->
         <section>
             <h2>Operaciones CRUD utilizadas</h2>
             <p>
-                Este módulo es de <strong>consulta</strong>, ya que no inserta ni elimina datos. 
-                Se utiliza principalmente el <strong>Read (Consultar)</strong> para obtener la información 
-                de las tablas de ventas, productos, clientes y empleados. 
+                Este módulo se centra en la <strong>consulta</strong> de información. Se utiliza principalmente el <strong>Read (Consultar)</strong> 
+                para obtener datos de las tablas <em>Analisis</em>, <em>ProductosMasVendidos</em>, <em>HorariosPico</em>, <em>EmpleadosMasVentas</em>, 
+                <em>ClientesFrecuentes</em>, <em>DiasConMasVentas</em> y <em>MesesConMasVentas</em>.
             </p>
         </section>
-
-        <!-- Tablas consultadas -->
-<section>
-    <h2>Tablas Utilizadas</h2>
-    <ul>
-        <li><strong>Ventas:</strong> Registros generales de las transacciones.</li>
-        <li><strong>DetalleVenta:</strong> Productos y cantidades vendidas.</li>
-        <li><strong>Producto:</strong> Información de los artículos vendidos.</li>
-        <li><strong>Empleado:</strong> Usuarios que registraron ventas.</li>
-        <li><strong>Cliente:</strong> Historial de compras por cliente.</li>
-    </ul>
-  </section>
-
 
         <!-- Imagen de modelo/tablas -->
         <section>
             <h2>Diagrama de Tablas</h2>
             <a href="../DataBaseInfo/InfoAnalisisDeVentas.html">
-        <button type="button">Ver Operaciones SQL</button>
-    </a>      
-  
-  </section>
+                <button type="button">Ver Operaciones SQL</button>
+            </a>      
+        </section>
 
         <!-- Responsable -->
         <section>
             <h2>Responsable del Módulo</h2>
             <div class="responsable">
-                <p><strong>Nombre:</strong> Isai Montaño Chavez<br>
-                </div>
+                <p><strong>Nombre:</strong> Isai Montaño Chavez</p>
+            </div>
         </section>
 
     </main>

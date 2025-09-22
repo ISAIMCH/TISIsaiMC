@@ -9,9 +9,357 @@
 <body>
     <!-- Sección de Diagrama de Tablas -->
     <section>
-        <h2>Diagrama de Tablas</h2>
-        <p>En este módulo no se han creado tablas adicionales, ya que todas las métricas y reportes necesarios se pueden calcular directamente a partir de las tablas existentes mediante consultas SQL o procesamiento en la programación. Operaciones como ticket promedio, ranking de productos, utilidad neta o clientes frecuentes se realizan usando SELECT, SUM, COUNT, AVG, GROUP BY, etc., y no requieren almacenar datos duplicados.</p>
-        <p>No es necesario crear tablas propias si los reportes son dinámicos y se calculan en tiempo real. Solo se considerarían tablas adicionales en caso de que se deseen guardar históricos, reportes pesados consultados frecuentemente o llevar un registro de auditoría. De esta manera, se mantiene la integridad de la información y se optimiza el rendimiento del sistema.</p>
+        <h2>Diagrama de la base de datos</h2>
+        <img src="./../assets/Analisis.png" alt="Diagrama de la base de datos de Proveedores">
+    </section>
+
+<section>
+    <h2>Tabla Analisis</h2>
+    <h3>Propósito</h3>
+    <p>
+        La tabla <strong>Analisis</strong> almacena un resumen general de las ventas dentro de un periodo específico,
+        incluyendo el total de ventas, ticket promedio y utilidad neta, permitiendo tener un registro histórico
+        para el análisis del desempeño.
+    </p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ID_Analisis:</strong> Clave primaria única que identifica cada registro de análisis.</li>
+        <li><strong>FechaInicio:</strong> Fecha de inicio del periodo analizado.</li>
+        <li><strong>FechaFin:</strong> Fecha de fin del periodo analizado.</li>
+        <li><strong>TotalVentas:</strong> Monto total vendido en el periodo.</li>
+        <li><strong>TicketPromedio:</strong> Promedio de venta por transacción.</li>
+        <li><strong>UtilidadNeta:</strong> Ganancia neta obtenida después de costos.</li>
+        <li><strong>FechaRegistro:</strong> Fecha de creación del registro, por defecto la fecha actual.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Tabla ProductosMasVendidos</h2>
+    <h3>Propósito</h3>
+    <p>
+        La tabla <strong>ProductosMasVendidos</strong> registra cuáles productos se vendieron más en cada análisis,
+        permitiendo tomar decisiones sobre inventario y promociones.
+    </p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ID_ProductoMasVendido:</strong> Clave primaria única de cada registro.</li>
+        <li><strong>ID_Analisis:</strong> Clave foránea que enlaza con la tabla Analisis.</li>
+        <li><strong>ID_Producto:</strong> Identificador del producto vendido.</li>
+        <li><strong>CantidadVendida:</strong> Número de unidades vendidas en el periodo.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Tabla HorariosPico</h2>
+    <h3>Propósito</h3>
+    <p>
+        La tabla <strong>HorariosPico</strong> identifica los intervalos horarios con mayor actividad de ventas,
+        ayudando a optimizar la atención y distribución del personal.
+    </p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ID_HorarioPico:</strong> Clave primaria única de cada registro.</li>
+        <li><strong>ID_Analisis:</strong> Clave foránea que enlaza con la tabla Analisis.</li>
+        <li><strong>Intervalo:</strong> Rango horario analizado (ej. 8-10am, 12-2pm).</li>
+        <li><strong>CantidadVentas:</strong> Número de ventas realizadas en ese intervalo.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Tabla EmpleadosMasVentas</h2>
+    <h3>Propósito</h3>
+    <p>
+        La tabla <strong>EmpleadosMasVentas</strong> almacena información sobre los empleados que generan más ventas,
+        permitiendo identificar al personal más productivo.
+    </p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ID_EmpleadoMasVentas:</strong> Clave primaria única de cada registro.</li>
+        <li><strong>ID_Analisis:</strong> Clave foránea que enlaza con la tabla Analisis.</li>
+        <li><strong>ID_Empleado:</strong> Identificador del empleado.</li>
+        <li><strong>TotalGenerado:</strong> Total de ingresos generados por el empleado en el periodo.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Tabla ClientesFrecuentes</h2>
+    <h3>Propósito</h3>
+    <p>
+        La tabla <strong>ClientesFrecuentes</strong> registra a los clientes que realizaron más compras en el periodo,
+        facilitando estrategias de fidelización y promociones personalizadas.
+    </p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ID_ClienteFrecuente:</strong> Clave primaria única de cada registro.</li>
+        <li><strong>ID_Analisis:</strong> Clave foránea que enlaza con la tabla Analisis.</li>
+        <li><strong>ID_Cliente:</strong> Identificador del cliente.</li>
+        <li><strong>ComprasRealizadas:</strong> Número de compras realizadas por el cliente en el periodo.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Tabla DiasConMasVentas</h2>
+    <h3>Propósito</h3>
+    <p>
+        La tabla <strong>DiasConMasVentas</strong> guarda los días dentro del periodo analizado en los que se
+        registraron mayores ventas, permitiendo identificar tendencias diarias de consumo.
+    </p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ID_DiaMasVenta:</strong> Clave primaria única de cada registro.</li>
+        <li><strong>ID_Analisis:</strong> Clave foránea que enlaza con la tabla Analisis.</li>
+        <li><strong>Fecha:</strong> Día específico con registro destacado de ventas.</li>
+        <li><strong>TotalVentas:</strong> Total de ventas en ese día.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Tabla MesesConMasVentas</h2>
+    <h3>Propósito</h3>
+    <p>
+        La tabla <strong>MesesConMasVentas</strong> almacena los meses con mayores ventas dentro del periodo analizado,
+        ayudando a identificar patrones de comportamiento estacional.
+    </p>
+
+    <h3>Campos</h3>
+    <ul>
+        <li><strong>ID_MesMasVenta:</strong> Clave primaria única de cada registro.</li>
+        <li><strong>ID_Analisis:</strong> Clave foránea que enlaza con la tabla Analisis.</li>
+        <li><strong>Año:</strong> Año correspondiente al mes analizado.</li>
+        <li><strong>Mes:</strong> Mes específico (1–12).</li>
+        <li><strong>TotalVentas:</strong> Total de ventas en ese mes.</li>
+    </ul>
+</section>
+
+
+<section>
+    <h2>Normalización de la Base de Datos de Análisis</h2>
+    <p>La base de datos del módulo de análisis de ventas ha sido diseñada siguiendo las primeras tres formas normales (1NF, 2NF, 3NF) 
+    para garantizar la organización, consistencia y eficiencia en la gestión de la información:</p>
+
+    <h3>1NF (Primera Forma Normal)</h3>
+    <p>Cada tabla tiene una clave primaria única y todos los campos contienen valores atómicos (no se permiten listas ni valores repetidos en una sola celda). Por ejemplo:</p>
+    <ul>
+        <li><strong>Tabla Analisis:</strong> Cada registro está identificado por <code>ID_Analisis</code>, 
+        y los campos como <code>TotalVentas</code>, <code>TicketPromedio</code> y <code>UtilidadNeta</code> 
+        almacenan valores únicos y atómicos.</li>
+        
+        <li><strong>Tabla ProductosMasVendidos:</strong> Cada producto se registra de manera individual 
+        con su <code>ID_Producto</code> y la <code>CantidadVendida</code>, evitando guardar múltiples productos en un mismo campo.</li>
+        
+        <li><strong>Tabla HorariosPico:</strong> Cada intervalo horario se almacena en un solo campo (<code>Intervalo</code>), 
+        sin listas ni rangos múltiples en una misma columna.</li>
+    </ul>
+
+    <h3>2NF (Segunda Forma Normal)</h3>
+    <p>La base de datos cumple 1NF y además, todos los atributos no clave dependen completamente de la clave primaria. Por ejemplo:</p>
+    <ul>
+        <li><strong>Tabla EmpleadosMasVentas:</strong> Los campos <code>ID_Empleado</code> y <code>TotalGenerado</code> 
+        dependen directamente de <code>ID_EmpleadoMasVentas</code>, sin dependencias parciales.</li>
+        
+        <li><strong>Tabla ClientesFrecuentes:</strong> Los atributos como <code>ID_Cliente</code> y <code>ComprasRealizadas</code> 
+        dependen por completo de la clave <code>ID_ClienteFrecuente</code>.</li>
+        
+        <li><strong>Tabla DiasConMasVentas:</strong> Los campos <code>Fecha</code> y <code>TotalVentas</code> 
+        dependen únicamente de la clave primaria <code>ID_DiaMasVenta</code>, evitando redundancias.</li>
+    </ul>
+
+    <h3>3NF (Tercera Forma Normal)</h3>
+    <p>La base de datos está en 2NF y no existen dependencias transitivas entre atributos no clave. Por ejemplo:</p>
+    <ul>
+        <li><strong>Tabla Analisis:</strong> Los valores de <code>TotalVentas</code>, <code>TicketPromedio</code> y <code>UtilidadNeta</code> 
+        dependen únicamente de <code>ID_Analisis</code>, y no entre ellos.</li>
+        
+        <li><strong>Tabla MesesConMasVentas:</strong> Los campos <code>Año</code>, <code>Mes</code> y <code>TotalVentas</code> 
+        dependen solo de <code>ID_MesMasVenta</code>, no de otros atributos.</li>
+        
+        <li><strong>Tabla ProductosMasVendidos:</strong> La información del producto (nombre, costo, etc.) 
+        se mantiene en la tabla <code>Producto</code>, evitando que atributos no clave dependan de otros no clave en esta tabla.</li>
+    </ul>
+
+    <p>Este diseño normalizado asegura una estructura de datos eficiente, minimizando redundancias 
+    y garantizando que el análisis de ventas se pueda realizar de manera flexible y precisa.</p>
+</section>
+
+
+
+    <!-- Sección de Ejemplos SQL -->
+    <section>
+        <div class="sql-block">
+            <h3>Código SQL para crear tablas</h3>
+            <p>-</p>
+            <pre>
+-- ===================================
+-- BASE DE DATOS: Módulo de Análisis de Ventas
+-- ===================================
+
+-- ===================================
+-- Tabla: Analisis
+-- ===================================
+CREATE TABLE Analisis (
+    ID_Analisis INT IDENTITY(1,1) PRIMARY KEY,
+    FechaInicio DATE NOT NULL,           -- inicio del periodo analizado
+    FechaFin DATE NOT NULL,              -- fin del periodo analizado
+    TotalVentas DECIMAL(10,2) NOT NULL,
+    TicketPromedio DECIMAL(10,2) NOT NULL,
+    UtilidadNeta DECIMAL(10,2) NOT NULL,
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+
+-- ===================================
+-- Tabla: ProductosMasVendidos
+-- ===================================
+CREATE TABLE ProductosMasVendidos (
+    ID_ProductoMasVendido INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    ID_Producto INT NOT NULL,
+    CantidadVendida INT NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis),
+    FOREIGN KEY (ID_Producto) REFERENCES Producto(ID_Producto)
+);
+
+-- ===================================
+-- Tabla: HorariosPico
+-- ===================================
+CREATE TABLE HorariosPico (
+    ID_HorarioPico INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    Intervalo NVARCHAR(50) NOT NULL,
+    CantidadVentas INT NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis)
+);
+
+-- ===================================
+-- Tabla: EmpleadosMasVentas
+-- ===================================
+CREATE TABLE EmpleadosMasVentas (
+    ID_EmpleadoMasVentas INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    ID_Empleado INT NOT NULL,
+    TotalGenerado DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis),
+    FOREIGN KEY (ID_Empleado) REFERENCES Empleado(ID_Empleado)
+);
+
+-- ===================================
+-- Tabla: ClientesFrecuentes
+-- ===================================
+CREATE TABLE ClientesFrecuentes (
+    ID_ClienteFrecuente INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    ID_Cliente INT NOT NULL,
+    ComprasRealizadas INT NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis),
+    FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
+);
+
+-- ===================================
+-- Tabla: DiasConMasVentas
+-- ===================================
+CREATE TABLE DiasConMasVentas (
+    ID_DiaMasVenta INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    Fecha DATE NOT NULL,
+    TotalVentas DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis)
+);
+
+-- ===================================
+-- Tabla: MesesConMasVentas
+-- ===================================
+CREATE TABLE MesesConMasVentas (
+    ID_MesMasVenta INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    Año INT NOT NULL,
+    Mes INT NOT NULL,
+    TotalVentas DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis)
+);
+
+            </pre>
+        </div>
+</section>
+
+<!-- Sección de Registros SQL -->
+
+    <section>
+        <div class="sql-block">
+            <h3>Codigo SQL para agregar registros</h3>
+            <p>-</p>
+            <pre>
+
+INSERT INTO Analisis (FechaInicio, FechaFin, TotalVentas, TicketPromedio, UtilidadNeta)
+VALUES ('2025-09-01', '2025-09-14', 705.00, 70.50, 395.00);
+
+INSERT INTO ProductosMasVendidos (ID_Analisis, ID_Producto, CantidadVendida)
+VALUES
+(1, 5, 3),   -- Té Verde
+(1, 9, 3),   -- Galleta
+(1, 1, 2),   -- Café Americano
+(1, 2, 2),   -- Capuchino
+(1, 4, 2),   -- Mocha
+(1, 6, 2),   -- Té Negro
+(1, 7, 2),   -- Panqué
+(1, 8, 2),   -- Croissant
+(1, 3, 1),   -- Latte
+(1, 10, 1);  -- Pastel de Queso
+
+INSERT INTO HorariosPico (ID_Analisis, Intervalo, CantidadVentas)
+VALUES
+(1, '8-10am', 3),   -- 09:15, 09:20, 08:30
+(1, '10-12am', 2),  -- 10:30, 11:45
+(1, '12-2pm', 2),   -- 12:45, 11:00
+(1, 'Otros horarios', 3); -- 14:10, 16:00, 18:15
+
+INSERT INTO EmpleadosMasVentas (ID_Analisis, ID_Empleado, TotalGenerado)
+VALUES
+(1, 5, 120.00), -- Luis
+(1, 8, 100.00), -- Fernanda
+(1, 4, 90.00),  -- Ana
+(1, 7, 85.00),  -- Miguel
+(1, 10, 75.00), -- Sofía
+(1, 2, 70.00),  -- María
+(1, 6, 60.00),  -- Paola
+(1, 1, 50.00),  -- Carlos
+(1, 9, 55.00),  -- Roberto
+(1, 3, 45.00);  -- Juan
+
+INSERT INTO ClientesFrecuentes (ID_Analisis, ID_Cliente, ComprasRealizadas)
+VALUES
+(1, 1, 1),
+(1, 2, 1),
+(1, 3, 1),
+(1, 4, 1),
+(1, 5, 1),
+(1, 6, 1),
+(1, 7, 1),
+(1, 8, 1),
+(1, 9, 1),
+(1, 10, 1);
+
+INSERT INTO DiasConMasVentas (ID_Analisis, Fecha, TotalVentas)
+VALUES
+(1, '2025-09-03', 120.00),
+(1, '2025-09-02', 135.00),
+(1, '2025-09-06', 100.00),
+(1, '2025-09-05', 85.00),
+(1, '2025-09-07', 130.00),
+(1, '2025-09-01', 120.00),
+(1, '2025-09-04', 60.00);
+
+INSERT INTO MesesConMasVentas (ID_Analisis, Año, Mes, TotalVentas)
+VALUES
+(1, 2025, 9, 705.00);
+
+            </pre>
+        </div>
+
     </section>
 
       <!-- Sección de Operaciones SQL -->
@@ -112,165 +460,9 @@ JOIN Producto P ON DV.idProducto = P.idProducto
 WHERE V.fecha BETWEEN '2025-09-01' AND '2025-09-14';
             </pre>
         </div>
-    </section>
-
-
-    <!-- Sección de Ejemplos SQL -->
-    <section>
-        <div class="sql-block">
-            <h3>EJEPLO DE TABLAS EN OTRO MODULOS</h3>
-            <p>-</p>
-            <pre>
-CREATE DATABASE ANALISIS_DE_VENTAS
-
-CREATE TABLE Empleado (
-    ID_Empleado INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre NVARCHAR(100) NOT NULL,
-    ApellidoP NVARCHAR(100) NOT NULL,
-    ApellidoM NVARCHAR(100),
-    Usuario NVARCHAR(50) UNIQUE NOT NULL,
-    Contrasena NVARCHAR(100) NOT NULL,
-    Rol NVARCHAR(50) NOT NULL,
-    FechaRegistro DATETIME DEFAULT GETDATE()
-);
-
-CREATE TABLE Cliente (
-    ID_Cliente INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre NVARCHAR(100) NOT NULL,
-    ApellidoP NVARCHAR(100) NOT NULL,
-    ApellidoM NVARCHAR(100),
-    Telefono NVARCHAR(20),
-    Correo NVARCHAR(100),
-    FechaRegistro DATETIME DEFAULT GETDATE()
-);
-
-CREATE TABLE Producto (
-    ID_Producto INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre NVARCHAR(100) NOT NULL,
-    Descripcion NVARCHAR(200),
-    Precio DECIMAL(10,2) NOT NULL,
-    PrecioCosto DECIMAL(10,2) NOT NULL, -- agregado para cálculo de utilidad neta
-    Stock INT NOT NULL,
-    FechaRegistro DATETIME DEFAULT GETDATE()
-);
-
-CREATE TABLE Venta (
-    ID_Venta INT IDENTITY(1,1) PRIMARY KEY,
-    Fecha DATETIME DEFAULT GETDATE(),
-    Total DECIMAL(10,2) NOT NULL,
-    ID_Empleado INT NOT NULL,
-    ID_Cliente INT NULL,
-    CONSTRAINT FK_Venta_Empleado FOREIGN KEY (ID_Empleado) REFERENCES Empleado(ID_Empleado),
-    CONSTRAINT FK_Venta_Cliente FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
-);
-
-CREATE TABLE DetalleVenta (
-    ID_DetalleVenta INT IDENTITY(1,1) PRIMARY KEY,
-    ID_Venta INT NOT NULL,
-    ID_Producto INT NOT NULL,
-    Cantidad INT NOT NULL,
-    PrecioUnitario DECIMAL(10,2) NOT NULL,
-    ID_Promocion INT NULL, -- relación con promociones
-    Subtotal AS (Cantidad * PrecioUnitario) PERSISTED,
-    CONSTRAINT FK_DetalleVenta_Venta FOREIGN KEY (ID_Venta) REFERENCES Venta(ID_Venta),
-    CONSTRAINT FK_DetalleVenta_Producto FOREIGN KEY (ID_Producto) REFERENCES Producto(ID_Producto)
-);
-
-            </pre>
-        </div>
-</section>
-
-<!-- Sección de Registros SQL -->
-
-    <section>
-        <div class="sql-block">
-            <h3>Codigo SQL para agregar registros</h3>
-            <p>-</p>
-            <pre>
-
--- ========================
--- 1. Empleados
--- ========================
-INSERT INTO Empleado (Nombre, ApellidoP, ApellidoM, Usuario, Contrasena, Rol)
-VALUES
-('Carlos', 'Ramírez', 'López', 'carlosr', '1234', 'Administrador'),
-('María', 'Gómez', 'Hernández', 'mariag', '1234', 'Vendedor'),
-('Juan', 'Pérez', 'Martínez', 'juanp', '1234', 'Vendedor'),
-('Ana', 'Torres', 'Jiménez', 'anat', '1234', 'Vendedor'),
-('Luis', 'Flores', 'Cruz', 'luisf', '1234', 'Administrador'),
-('Paola', 'Reyes', 'García', 'paolar', '1234', 'Vendedor'),
-('Miguel', 'Díaz', 'Morales', 'migueld', '1234', 'Vendedor'),
-('Fernanda', 'Vargas', 'Santos', 'fernandav', '1234', 'Vendedor'),
-('Roberto', 'Mendoza', 'Castillo', 'robertom', '1234', 'Administrador'),
-('Sofía', 'Navarro', 'Rojas', 'sofian', '1234', 'Vendedor');
-
--- ========================
--- 2. Clientes
--- ========================
-INSERT INTO Cliente (Nombre, ApellidoP, ApellidoM, Telefono, Correo)
-VALUES
-('Alejandro', 'Santos', 'Rivas', '5551112222', 'alejandro@mail.com'),
-('Beatriz', 'López', 'Moreno', '5553334444', 'beatriz@mail.com'),
-('Carmen', 'Hernández', 'Pérez', '5555556666', 'carmen@mail.com'),
-('Daniel', 'Gómez', 'Cruz', '5557778888', 'daniel@mail.com'),
-('Elena', 'Martínez', 'Vega', '5559990000', 'elena@mail.com'),
-('Felipe', 'Jiménez', 'Reyes', '5551212121', 'felipe@mail.com'),
-('Gabriela', 'Navarro', 'Sosa', '5553434343', 'gabriela@mail.com'),
-('Héctor', 'Ramírez', 'Torres', '5555656565', 'hector@mail.com'),
-('Isabel', 'Díaz', 'Morales', '5557878787', 'isabel@mail.com'),
-('Jorge', 'Vargas', 'Santos', '5559090909', 'jorge@mail.com');
-
--- ========================
--- 3. Productos
--- ========================
-INSERT INTO Producto (Nombre, Descripcion, Precio, PrecioCosto, Stock)
-VALUES
-('Café Americano', 'Taza de café negro', 25.00, 10.00, 200),
-('Capuchino', 'Café con leche y espuma', 35.00, 15.00, 150),
-('Latte', 'Café espresso con leche', 40.00, 18.00, 100),
-('Mocha', 'Café con chocolate', 45.00, 20.00, 120),
-('Té Verde', 'Infusión de té verde', 20.00, 8.00, 180),
-('Té Negro', 'Infusión de té negro', 22.00, 9.00, 170),
-('Panqué', 'Panqué de vainilla', 30.00, 12.00, 90),
-('Croissant', 'Pan de mantequilla', 28.00, 11.00, 80),
-('Galleta', 'Galleta de chocolate', 15.00, 6.00, 250),
-('Pastel de Queso', 'Rebanada de cheesecake', 50.00, 22.00, 70);
-
--- ========================
--- 4. Ventas
--- ========================
-INSERT INTO Venta (Fecha, Total, ID_Empleado, ID_Cliente)
-VALUES
-('2025-09-01 09:15', 50.00, 1, 1),
-('2025-09-01 10:30', 70.00, 2, 2),
-('2025-09-02 11:00', 45.00, 3, 3),
-('2025-09-02 14:10', 90.00, 4, 4),
-('2025-09-03 12:45', 120.00, 5, 5),
-('2025-09-04 09:20', 60.00, 6, 6),
-('2025-09-05 16:00', 85.00, 7, 7),
-('2025-09-06 18:15', 100.00, 8, 8),
-('2025-09-07 08:30', 55.00, 9, 9),
-('2025-09-07 11:45', 75.00, 10, 10);
-
--- ========================
--- 5. DetalleVenta
--- ========================
-INSERT INTO DetalleVenta (ID_Venta, ID_Producto, Cantidad, PrecioUnitario, ID_Promocion)
-VALUES
-(1, 1, 2, 25.00, 1),   -- Café Americano
-(2, 2, 2, 35.00, 2),   -- Capuchino
-(3, 3, 1, 40.00, 0),   -- Latte
-(4, 4, 2, 45.00, 9),   -- Mocha
-(5, 5, 3, 20.00, 5),   -- Té Verde
-(6, 6, 2, 22.00, 0),   -- Té Negro
-(7, 7, 2, 30.00, 0),   -- Panqué
-(8, 8, 2, 28.00, 6),   -- Croissant
-(9, 9, 3, 15.00, 8),   -- Galleta
-(10, 10, 1, 50.00, 3); -- Pastel de Queso  
-            </pre>
-        </div>
 
     </section>
+
 
 </body>
 </html>
