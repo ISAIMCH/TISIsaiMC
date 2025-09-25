@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Base de Datos</title>
+    <link rel="stylesheet" href="../style/StyleAVI.css">
+</head>
+<body>
+
+      <nav class="top-nav">
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+          <li><a href="Principal.html">Funciones de Usuarios</a></li>
+          <li class="active"><a href="InformacionBD.html">Información de BD</a></li>
+          <li><a href="Codigo.html">Código de BD</a></li>
+          <li><a href="Registros.html">Código Agregar Registros</a></li>
+      </ul>
+  </nav>
+
+<header>
+    <h1>Documentación de la Base de Datos de Proveedores</h1>
+    <p>Módulo: Proveedores</p>
+</header>
+
+<h2>Diagrama de la Base de Datos</h2>
+<img src="../assets/PROVEEDORES.png" alt="Diagrama de la Base de Datos">
+
+<!-- Tabla: Direccion -->
+<div class="tabla-container-box">
+    <h2>Tabla: Direccion</h2>
+    <p>Propósito: Almacenar la información de ubicación de cada proveedor de manera estructurada.</p>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de Dato</th>
+            <th>Permite Nulo</th>
+            <th>Propósito / Justificación</th>
+        </tr>
+        <tr>
+            <td>ID_Direccion</td>
+            <td>INT</td>
+            <td>No</td>
+            <td>Clave primaria que identifica de manera única cada dirección.</td>
+        </tr>
+        <tr>
+            <td>Calle</td>
+            <td>NVARCHAR(200)</td>
+            <td>Sí</td>
+            <td>Calle donde se encuentra el proveedor.</td>
+        </tr>
+        <tr>
+            <td>Colonia</td>
+            <td>NVARCHAR(100)</td>
+            <td>Sí</td>
+            <td>Colonia o barrio del proveedor.</td>
+        </tr>
+        <tr>
+            <td>CP</td>
+            <td>NVARCHAR(10)</td>
+            <td>Sí</td>
+            <td>Código postal del proveedor.</td>
+        </tr>
+        <tr>
+            <td>Ciudad</td>
+            <td>NVARCHAR(100)</td>
+            <td>Sí</td>
+            <td>Ciudad donde se encuentra el proveedor.</td>
+        </tr>
+        <tr>
+            <td>Estado</td>
+            <td>NVARCHAR(100)</td>
+            <td>Sí</td>
+            <td>Estado o región del proveedor.</td>
+        </tr>
+        <tr>
+            <td>Pais</td>
+            <td>NVARCHAR(50)</td>
+            <td>Sí</td>
+            <td>País donde se encuentra el proveedor.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Tabla: Proveedor -->
+<div class="tabla-container">
+    <h2>Tabla: Proveedor</h2>
+    <p>Propósito: Almacenar la información principal de cada proveedor y vincularlo con su dirección.</p>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de Dato</th>
+            <th>Permite Nulo</th>
+            <th>Propósito / Justificación</th>
+        </tr>
+        <tr>
+            <td>ID_Proveedor</td>
+            <td>INT</td>
+            <td>No</td>
+            <td>Clave primaria que identifica de manera única cada proveedor.</td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>NVARCHAR(100)</td>
+            <td>No</td>
+            <td>Primer nombre del proveedor.</td>
+        </tr>
+        <tr>
+            <td>SegundoNombre</td>
+            <td>NVARCHAR(100)</td>
+            <td>Sí</td>
+            <td>Segundo nombre del proveedor, si aplica.</td>
+        </tr>
+        <tr>
+            <td>ApellidoP</td>
+            <td>NVARCHAR(100)</td>
+            <td>No</td>
+            <td>Apellido paterno del proveedor.</td>
+        </tr>
+        <tr>
+            <td>ApellidoM</td>
+            <td>NVARCHAR(100)</td>
+            <td>Sí</td>
+            <td>Apellido materno del proveedor, si aplica.</td>
+        </tr>
+        <tr>
+            <td>Telefono</td>
+            <td>NVARCHAR(20)</td>
+            <td>No</td>
+            <td>Número de contacto del proveedor.</td>
+        </tr>
+        <tr>
+            <td>Correo</td>
+            <td>NVARCHAR(100)</td>
+            <td>Sí</td>
+            <td>Correo electrónico del proveedor.</td>
+        </tr>
+        <tr>
+            <td>RFC_NIT</td>
+            <td>NVARCHAR(20)</td>
+            <td>No</td>
+            <td>Identificación fiscal del proveedor.</td>
+        </tr>
+        <tr>
+            <td>Estatus</td>
+            <td>NVARCHAR(10)</td>
+            <td>No</td>
+            <td>Indica si el proveedor está activo o inactivo.</td>
+        </tr>
+        <tr>
+            <td>FechaRegistro</td>
+            <td>DATE</td>
+            <td>No</td>
+            <td>Fecha en que se registró el proveedor.</td>
+        </tr>
+        <tr>
+            <td>ID_Direccion</td>
+            <td>INT</td>
+            <td>No</td>
+            <td>Llave foránea que enlaza el proveedor con su dirección en la tabla Direccion.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Tabla: ProveedorIngrediente -->
+<div class="tabla-container">
+    <h2>Tabla: ProveedorIngrediente</h2>
+    <p>Propósito: Registrar qué ingredientes proporciona cada proveedor y en qué cantidad.</p>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de Dato</th>
+            <th>Permite Nulo</th>
+            <th>Propósito / Justificación</th>
+        </tr>
+        <tr>
+            <td>ID_ProveedorIngrediente</td>
+            <td>INT</td>
+            <td>No</td>
+            <td>Clave primaria que identifica cada registro de relación proveedor-ingrediente.</td>
+        </tr>
+        <tr>
+            <td>ID_Proveedor</td>
+            <td>INT</td>
+            <td>No</td>
+            <td>Llave foránea hacia la tabla Proveedor, identifica el proveedor que surte el ingrediente.</td>
+        </tr>
+        <tr>
+            <td>ID_Ingrediente</td>
+            <td>INT</td>
+            <td>No</td>
+            <td>Identificador del ingrediente suministrado.</td>
+        </tr>
+        <tr>
+            <td>Cantidad</td>
+            <td>DECIMAL(10,2)</td>
+            <td>No</td>
+            <td>Cantidad de ingredientes que proporciona el proveedor.</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

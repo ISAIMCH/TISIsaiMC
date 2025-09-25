@@ -1,0 +1,150 @@
+/* Fuente moderna y base */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Menú de navegación superior */
+.top-nav {
+    background: #2e7d32;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.top-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.top-nav li {
+    margin: 0;
+}
+
+.top-nav a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.top-nav a:hover,
+.top-nav li.active a {
+    background: #1b5e20;
+}
+
+/* Encabezado principal */
+h1 {
+    text-align: center;
+    color: #1b5e20;
+    margin: 2rem 1rem 1rem 1rem;
+    font-size: 2.5rem;
+}
+
+/* Subtítulos de sección */
+h2 {
+    color: #2e7d32;
+    margin: 2rem 0 1rem 0;
+    border-left: 5px solid #2e7d32;
+    padding-left: 0.75rem;
+    font-size: 1.8rem;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+header h1 {
+    margin: 0;
+    color: #1b5e20;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+header p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Imagen del diagrama */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem auto 2rem auto;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Contenedor de tabla */
+.tabla-container, .tabla-container-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem auto 2rem auto;
+    max-width: 1100px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tabla-container:hover, .tabla-container-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Párrafo descriptivo */
+.tabla-container p, .tabla-container-box p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #2e7d32;
+    color: #fff;
+    font-weight: 600;
+}
+
+tr:hover {
+    background: #f1f1f1;
+}
+
+/* Footer opcional */
+footer {
+    background: #1b5e20;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}

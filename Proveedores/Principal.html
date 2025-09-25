@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Proveedores</title>
+    <link rel="stylesheet" href="../style/StyleAV.css">
+</head>
+<body>
+
+  <nav class="top-nav">
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li class="active"><a href="#funciones-usuarios">Funciones de Usuarios</a></li>
+            <li><a href="InformacionBD.html">Información de BD</a></li>
+            <li><a href="Codigo.html">Código de BD</a></li>
+            <li><a href="Registros.html">Código Agregar Registros</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Gestión de Proveedores</h1>
+        <p>Módulo: Proveedores</p>
+    </header>
+
+    <main id="funciones-usuarios">
+
+         <section>
+            <h2>Objetivo del Módulo</h2>
+            <p>
+                El módulo de proveedores tiene como objetivo facilitar el control y la organización de los proveedores de la cafetería. Aquí se registran, actualizan y consultan sus datos de contacto y dirección, lo que ayuda a mantener relaciones claras y ordenadas. 
+                Para el gerente, es una herramienta para administrar y decidir con qué proveedores trabajar; para los empleados, sirve como guía rápida para encontrar la información necesaria cuando se realizan pedidos o consultas. 
+                De esta forma se asegura que los procesos de compra sean más eficientes y transparentes.
+            </p>
+        </section>
+
+        <section>
+            <h2>Funciones del Gerente</h2>
+
+            <div class="card">
+                <h3>Crear proveedor</h3>
+                <p><strong>CRUD:</strong> Crear</p>
+                <p><strong>Campos:</strong> Nombre, SegundoNombre, ApellidoP, ApellidoM, Teléfono, Correo, RFC_NIT, ID_Direccion.</p>
+                <p><strong>Resultado:</strong> Se registra un nuevo proveedor con su información y dirección asociada.</p>
+            </div>
+
+            <div class="card">
+                <h3>Consultar proveedores</h3>
+                <p><strong>CRUD:</strong> Leer</p>
+                <p><strong>Campos:</strong> Todos los campos de <em>Proveedor</em> y <em>Direccion</em>.</p>
+                <p><strong>Resultado:</strong> Lista completa de proveedores con su información y estado.</p>
+            </div>
+
+            <div class="card">
+                <h3>Actualizar datos de proveedor</h3>
+                <p><strong>CRUD:</strong> Actualizar</p>
+                <p><strong>Campos:</strong> Nombre, SegundoNombre, ApellidoP, ApellidoM, Teléfono, Correo, RFC_NIT, Estatus, ID_Direccion.</p>
+                <p><strong>Resultado:</strong> El sistema modifica los datos seleccionados de un proveedor.</p>
+            </div>
+
+            <div class="card">
+                <h3>Cambiar estatus de proveedor</h3>
+                <p><strong>CRUD:</strong> Eliminar (lógico)</p>
+                <p><strong>Campos:</strong> Estatus (Activo/Inactivo).</p>
+                <p><strong>Resultado:</strong> El proveedor no se elimina de la BD, pero queda inactivo para futuras operaciones.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Funciones del Empleado</h2>
+
+            <div class="card">
+                <h3>Crear proveedor</h3>
+                <p><strong>CRUD:</strong> Crear</p>
+                <p><strong>Campos:</strong> Nombre, ApellidoP, Teléfono, Correo, RFC_NIT.</p>
+                <p><strong>Resultado:</strong> El empleado puede registrar un proveedor básico, que luego podrá ser complementado por el gerente.</p>
+            </div>
+
+            <div class="card">
+                <h3>Consultar proveedores</h3>
+                <p><strong>CRUD:</strong> Leer</p>
+                <p><strong>Campos:</strong> Nombre, Apellidos, Teléfono, Correo, RFC_NIT, Estatus.</p>
+                <p><strong>Resultado:</strong> El empleado puede ver la información de contacto y estado de los proveedores.</p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>Monky-Café &copy; 2025 | Sistema de gestión</p>
+    </footer>
+</body>
+</html>

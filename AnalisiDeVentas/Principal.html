@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Análisis de Ventas</title>
+    <link rel="stylesheet" href="../style/StyleAV.css">
+</head>
+<body>
+
+  <nav class="top-nav">
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li class="active"><a href="#funciones-usuarios">Funciones de Usuarios</a></li>
+            <li><a href="InformacionBD.html">Información de BD</a></li>
+            <li><a href="Codigo.html">Código de BD</a></li>
+            <li><a href="Registros.html">Código Agregar Registros</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Gestión y análisis de datos para la cafetería</h1>
+        <p>Módulo: Análisis de Ventas</p>
+    </header>
+
+    <main>
+
+         <section>
+            <h2>Objetivo del Módulo</h2>
+            <p>
+                El módulo de gestión y análisis de datos busca aprovechar la información de las ventas de la cafetería para entender mejor cómo está funcionando el negocio. Con este módulo podemos saber qué productos son los más vendidos, calcular el ticket promedio de los clientes, identificar qué empleado ha vendido más y conocer las ganancias netas en un periodo de tiempo que nosotros mismos definimos. Todo esto nos permite tomar decisiones más inteligentes y rápidas para mejorar el servicio y aumentar la rentabilidad. Lo hacemos de una forma clara y práctica, usando los registros de ventas para transformarlos en datos útiles que nos ayuden a crecer y a organizar mejor la operación diaria de la cafetería.
+            </p>
+        </section>
+
+        <section>
+            <h2>Funciones del Gerente</h2>
+            <div class="card">
+                <h3>Ventas por periodo</h3>
+                <p><strong>Acción del Usuario:</strong> Selecciona un rango de fechas.</p>
+                <p><strong>Acción del Sistema:</strong> Consulta en la BD y suma las ventas agrupadas.</p>
+                <p><strong>Resultado:</strong> Tabla o gráfico con los ingresos totales.</p>
+            </div>
+
+            <div class="card">
+                <h3>Ticket Promedio</h3>
+                <p><strong>Acción del Usuario:</strong> Selecciona un periodo de tiempo.</p>
+                <p><strong>Acción del Sistema:</strong> Calcula promedio entre total de ventas y tickets.</p>
+                <p><strong>Resultado:</strong> Se muestra el gasto promedio por cliente.</p>
+            </div>
+
+            <div class="card">
+                <h3>Ranking de productos más vendidos</h3>
+                <p><strong>Acción del Usuario:</strong> Presiona el botón “Productos más vendidos”.</p>
+                <p><strong>Acción del Sistema:</strong> Consulta las ventas en la tabla DetalleVenta.</p>
+                <p><strong>Resultado:</strong> Gráfico con los productos más populares.</p>
+            </div>
+
+            <div class="card">
+                <h3>Horarios con más afluencia</h3>
+                <p><strong>Acción del Usuario:</strong> Selecciona un rango de fechas.</p>
+                <p><strong>Acción del Sistema:</strong> Agrupa ventas por hora y contabiliza.</p>
+                <p><strong>Resultado:</strong> Gráfico con horarios pico.</p>
+            </div>
+
+            <div class="card">
+                <h3>Empleados con más ventas</h3>
+                <p><strong>Acción del Usuario:</strong> Ingresa al apartado “Ventas por empleado”.</p>
+                <p><strong>Acción del Sistema:</strong> Consulta ventas por ID del empleado.</p>
+                <p><strong>Resultado:</strong> Ranking de empleados con más ventas.</p>
+            </div>
+
+            <div class="card">
+                <h3>Clientes frecuentes</h3>
+                <p><strong>Acción del Usuario:</strong> Selecciona “Clientes frecuentes”.</p>
+                <p><strong>Acción del Sistema:</strong> Busca clientes con más compras.</p>
+                <p><strong>Resultado:</strong> Lista de clientes leales.</p>
+            </div>
+
+            <div class="card">
+                <h3>Utilidad neta</h3>
+                <p><strong>Acción del Usuario:</strong> Selecciona un periodo de tiempo.</p>
+                <p><strong>Acción del Sistema:</strong> Resta al total de ventas el costo de productos.</p>
+                <p><strong>Resultado:</strong> Se muestra la ganancia real.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Funciones del Empleado</h2>
+            <div class="card">
+                <h3>Consultar ventas realizadas</h3>
+                <p><strong>Acción del Usuario:</strong> Selecciona un rango de fechas.</p>
+                <p><strong>Acción del Sistema:</strong> Filtra ventas por ID del empleado.</p>
+                <p><strong>Resultado:</strong> Total de ventas y monto generado.</p>
+            </div>
+
+            <div class="card">
+                <h3>Consultar productos más vendidos</h3>
+                <p><strong>Acción del Usuario:</strong> Presiona el botón “Productos más vendidos”.</p>
+                <p><strong>Acción del Sistema:</strong> Lista los productos más comprados en el día/semana.</p>
+                <p><strong>Resultado:</strong> Recomendaciones para clientes.</p>
+            </div>
+
+            <div class="card">
+                <h3>Revisar horarios de mayor afluencia</h3>
+                <p><strong>Acción del Usuario:</strong> Ingresa al apartado “Horarios con más ventas”.</p>
+                <p><strong>Acción del Sistema:</strong> Analiza las ventas por hora.</p>
+                <p><strong>Resultado:</strong> Empleado sabe las horas pico.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Monky-Café &copy; 2025 | Sistema de gestión</p>
+    </footer>
+</body>
+</html>

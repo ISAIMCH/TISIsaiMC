@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Código de BD - Monky Café</title>
+  <link rel="stylesheet" href="../style/styleAV.css">
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ 
+</head>
+<body>
+
+  <!-- Menú de navegación superior -->
+  <nav class="top-nav">
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+          <li><a href="Principal.html">Funciones de Usuarios</a></li>
+          <li><a href="InformacionBD.html">Información de BD</a></li>
+          <li><a href="Codigo.html">Código de BD</a></li>
+          <li class="active"><a href="Registros.html">Código Agregar Registros</a></li>
+      </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Código SQL de la Base de Datos</h1>
+      <p>Módulo de Proveedores</p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <h2>Script de Creación de Tablas</h2>
+    <p>Este script contiene todas las tablas relacionadas con el módulo de Proveedores.</p>
+
+    <pre><code>
+-- =======================
+-- Inserción en Direccion
+-- =======================
+INSERT INTO Direccion (Calle, Colonia, CP, Ciudad, Estado, Pais)
+VALUES
+('Av. Reforma 123', 'Centro', '06000', 'Ciudad de México', 'CDMX', 'México'),
+('Calle Hidalgo 45', 'Roma', '06700', 'Ciudad de México', 'CDMX', 'México'),
+('Av. Juárez 789', 'Del Valle', '03100', 'Ciudad de México', 'CDMX', 'México'),
+('Calle Morelos 34', 'Condesa', '06140', 'Ciudad de México', 'CDMX', 'México'),
+('Av. Universidad 120', 'Coyoacán', '04000', 'Ciudad de México', 'CDMX', 'México');
+
+-- =======================
+-- Inserción en Proveedor
+-- =======================
+INSERT INTO Proveedor (Nombre, SegundoNombre, ApellidoP, ApellidoM, Telefono, Correo, RFC_NIT, Estatus, ID_Direccion)
+VALUES
+('Juan', 'Carlos', 'Pérez', 'López', '5551234567', 'juan.perez@email.com', 'JPL890123AB1', 'Activo', 1),
+('María', NULL, 'García', 'Hernández', '5552345678', 'maria.garcia@email.com', 'MGH900321CD2', 'Activo', 2),
+('Pedro', 'Luis', 'Ramírez', 'Torres', '5553456789', 'pedro.ramirez@email.com', 'PLR850712EF3', 'Activo', 3),
+('Laura', 'Fernanda', 'Martínez', 'Sánchez', '5554567890', 'laura.martinez@email.com', 'LMS920615GH4', 'Activo', 4),
+('José', NULL, 'Hernández', 'Morales', '5555678901', 'jose.hernandez@email.com', 'JHM800101IJ5', 'Activo', 5);
+
+-- ==============================
+-- Inserción en ProveedorIngrediente
+-- ==============================
+INSERT INTO ProveedorIngrediente (ID_Proveedor, ID_Ingrediente, Cantidad)
+VALUES
+(1, 1, 100.50),
+(2, 2, 200.00),
+(3, 3, 150.75),
+(4, 4, 300.00),
+(5, 5, 250.25);
+            
+    </code></pre>
+
+  </main>
+
+  <footer>
+    <p>Proyecto escolar - Monky Café © 2025</p>
+  </footer>
+
+</body>
+</html>

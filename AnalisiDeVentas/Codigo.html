@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Código de BD - Monky Café</title>
+  <link rel="stylesheet" href="../style/styleAV.css">
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ 
+</head>
+<body>
+
+  <!-- Menú de navegación superior -->
+  <nav class="top-nav">
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+          <li><a href="Principal.html">Funciones de Usuarios</a></li>
+          <li><a href="InformacionBD.html">Información de BD</a></li>
+          <li class="active"><a href="CodigoBD.html">Código de BD</a></li>
+          <li><a href="Registros.html">Código Agregar Registros</a></li>
+      </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Código SQL de la Base de Datos</h1>
+      <p>Módulo de Análisis de Ventas</p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <h2>Script de Creación de Tablas</h2>
+    <p>Este script contiene todas las tablas relacionadas con el módulo de análisis de ventas.</p>
+
+    <pre><code>
+-- ===================================
+-- BASE DE DATOS: Módulo de Análisis de Ventas
+-- ===================================
+
+-- ===================================
+-- Tabla: Analisis
+-- ===================================
+CREATE TABLE Analisis (
+    ID_Analisis INT IDENTITY(1,1) PRIMARY KEY,
+    FechaInicio DATE NOT NULL,           -- inicio del periodo analizado
+    FechaFin DATE NOT NULL,              -- fin del periodo analizado
+    TotalVentas DECIMAL(10,2) NOT NULL,
+    TicketPromedio DECIMAL(10,2) NOT NULL,
+    UtilidadNeta DECIMAL(10,2) NOT NULL,
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+
+-- ===================================
+-- Tabla: ProductosMasVendidos
+-- ===================================
+CREATE TABLE ProductosMasVendidos (
+    ID_ProductoMasVendido INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    ID_Producto INT NOT NULL,
+    CantidadVendida INT NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis),
+    FOREIGN KEY (ID_Producto) REFERENCES Producto(ID_Producto)
+);
+
+-- ===================================
+-- Tabla: HorariosPico
+-- ===================================
+CREATE TABLE HorariosPico (
+    ID_HorarioPico INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    Intervalo NVARCHAR(50) NOT NULL,
+    CantidadVentas INT NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis)
+);
+
+-- ===================================
+-- Tabla: EmpleadosMasVentas
+-- ===================================
+CREATE TABLE EmpleadosMasVentas (
+    ID_EmpleadoMasVentas INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    ID_Empleado INT NOT NULL,
+    TotalGenerado DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis),
+    FOREIGN KEY (ID_Empleado) REFERENCES Empleado(ID_Empleado)
+);
+
+-- ===================================
+-- Tabla: ClientesFrecuentes
+-- ===================================
+CREATE TABLE ClientesFrecuentes (
+    ID_ClienteFrecuente INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    ID_Cliente INT NOT NULL,
+    ComprasRealizadas INT NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis),
+    FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
+);
+
+-- ===================================
+-- Tabla: DiasConMasVentas
+-- ===================================
+CREATE TABLE DiasConMasVentas (
+    ID_DiaMasVenta INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    Fecha DATE NOT NULL,
+    TotalVentas DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis)
+);
+
+-- ===================================
+-- Tabla: MesesConMasVentas
+-- ===================================
+CREATE TABLE MesesConMasVentas (
+    ID_MesMasVenta INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Analisis INT NOT NULL,
+    Año INT NOT NULL,
+    Mes INT NOT NULL,
+    TotalVentas DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (ID_Analisis) REFERENCES Analisis(ID_Analisis)
+);
+    </code></pre>
+
+  </main>
+
+  <footer>
+    <p>Proyecto escolar - Monky Café © 2025</p>
+  </footer>
+
+</body>
+</html>

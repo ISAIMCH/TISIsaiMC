@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Código de BD - Monky Café</title>
+  <link rel="stylesheet" href="../style/styleAV.css">
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ 
+</head>
+<body>
+
+  <!-- Menú de navegación superior -->
+  <nav class="top-nav">
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+          <li><a href="Principal.html">Funciones de Usuarios</a></li>
+          <li><a href="InformacionBD.html">Información de BD</a></li>
+          <li class="active"><a href="CodigoBD.html">Código de BD</a></li>
+          <li><a href="Registros.html">Código Agregar Registros</a></li>
+      </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Código SQL de la Base de Datos</h1>
+      <p>Módulo de Proveedores</p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <h2>Script de Creación de Tablas</h2>
+    <p>Este script contiene todas las tablas relacionadas con el módulo de Proveedores.</p>
+
+    <pre><code>
+CREATE TABLE Direccion (
+    ID_Direccion INT IDENTITY(1,1) PRIMARY KEY,
+    Calle NVARCHAR(200),
+    Colonia NVARCHAR(100),
+    CP NVARCHAR(10),
+    Ciudad NVARCHAR(100),
+    Estado NVARCHAR(100),
+    Pais NVARCHAR(50)
+);
+
+CREATE TABLE Proveedor ( 
+    ID_Proveedor INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100) NOT NULL,
+    SegundoNombre NVARCHAR(100),
+    ApellidoP NVARCHAR(100) NOT NULL,
+    ApellidoM NVARCHAR(100),
+    Telefono NVARCHAR(20) NOT NULL,
+    Correo NVARCHAR(100),
+    RFC_NIT NVARCHAR(20) NOT NULL,
+    Estatus NVARCHAR(10) DEFAULT 'Activo',
+    FechaRegistro DATE DEFAULT GETDATE(),
+    ID_Direccion INT FOREIGN KEY REFERENCES Direccion(ID_Direccion)
+);
+
+CREATE TABLE ProveedorIngrediente (
+    ID_ProveedorIngrediente INT IDENTITY(1,1) PRIMARY KEY,
+    ID_Proveedor INT NOT NULL FOREIGN KEY REFERENCES Proveedor(ID_Proveedor),
+    ID_Ingrediente INT NOT NULL,
+    Cantidad DECIMAL(10,2) DEFAULT 0
+);
+            
+    </code></pre>
+
+  </main>
+
+  <footer>
+    <p>Proyecto escolar - Monky Café © 2025</p>
+  </footer>
+
+</body>
+</html>
