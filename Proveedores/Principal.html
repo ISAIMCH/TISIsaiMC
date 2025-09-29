@@ -26,64 +26,76 @@
     <main id="funciones-usuarios">
 
          <section>
-            <h2>Objetivo del Módulo</h2>
-            <p>
-                El módulo de proveedores tiene como objetivo facilitar el control y la organización de los proveedores de la cafetería. Aquí se registran, actualizan y consultan sus datos de contacto y dirección, lo que ayuda a mantener relaciones claras y ordenadas. 
-                Para el gerente, es una herramienta para administrar y decidir con qué proveedores trabajar; para los empleados, sirve como guía rápida para encontrar la información necesaria cuando se realizan pedidos o consultas. 
-                De esta forma se asegura que los procesos de compra sean más eficientes y transparentes.
-            </p>
-        </section>
+    <h2>Funciones del Gerente</h2>
 
-        <section>
-            <h2>Funciones del Gerente</h2>
+    <div class="card">
+        <h3>Registrar nuevo proveedor</h3>
+        <p><strong>Acción del Usuario:</strong> El gerente es capaz de ingresar los datos completos del proveedor incluyendo: Nombre, SegundoNombre, ApellidoP, ApellidoM, Teléfono, Correo, RFC_NIT, Estatus, FechaRegistro y la dirección con Calle, Colonia, CP, Ciudad, Estado y País .</p>
+        <p><strong>Acción del Sistema:</strong> Valida la información capturada y la guarda en la base de datos asociando el proveedor con su dirección.</p>
+        <p><strong>Resultado:</strong> Se registra un nuevo proveedor con toda su información y dirección asociada.</p>
+    </div>
 
-            <div class="card">
-                <h3>Crear proveedor</h3>
-                <p><strong>CRUD:</strong> Crear</p>
-                <p><strong>Campos:</strong> Nombre, SegundoNombre, ApellidoP, ApellidoM, Teléfono, Correo, RFC_NIT, ID_Direccion.</p>
-                <p><strong>Resultado:</strong> Se registra un nuevo proveedor con su información y dirección asociada.</p>
-            </div>
+    <div class="card">
+        <h3>Consultar lista de proveedores</h3>
+        <p><strong>Acción del Usuario:</strong> El gerente es capaz de consultar todos los proveedores registrados visualizando sus campos: Nombre, SegundoNombre, ApellidoP, ApellidoM, Teléfono, Correo, RFC_NIT, Estatus, FechaRegistro y la dirección completa (Calle, Colonia, CP, Ciudad, Estado, País).</p>
+        <p><strong>Acción del Sistema:</strong> Recupera y muestra la información de todos los proveedores registrados en la base de datos.</p>
+        <p><strong>Resultado:</strong> Lista completa de proveedores con datos personales, contacto, estatus y dirección.</p>
+    </div>
 
-            <div class="card">
-                <h3>Consultar proveedores</h3>
-                <p><strong>CRUD:</strong> Leer</p>
-                <p><strong>Campos:</strong> Todos los campos de <em>Proveedor</em> y <em>Direccion</em>.</p>
-                <p><strong>Resultado:</strong> Lista completa de proveedores con su información y estado.</p>
-            </div>
+    <div class="card">
+        <h3>Actualizar datos de proveedor</h3>
+        <p><strong>Acción del Usuario:</strong> El gerente es capaz de seleccionar un proveedor y modificar sus datos: Nombre, SegundoNombre, ApellidoP, ApellidoM, Teléfono, Correo, RFC_NIT, Estatus, FechaRegistro y actualizar la dirección (Calle, Colonia, CP, Ciudad, Estado, País).</p>
+        <p><strong>Acción del Sistema:</strong> Actualiza los campos seleccionados en la base de datos.</p>
+        <p><strong>Resultado:</strong> Los cambios realizados en los datos del proveedor quedan guardados correctamente.</p>
+    </div>
 
-            <div class="card">
-                <h3>Actualizar datos de proveedor</h3>
-                <p><strong>CRUD:</strong> Actualizar</p>
-                <p><strong>Campos:</strong> Nombre, SegundoNombre, ApellidoP, ApellidoM, Teléfono, Correo, RFC_NIT, Estatus, ID_Direccion.</p>
-                <p><strong>Resultado:</strong> El sistema modifica los datos seleccionados de un proveedor.</p>
-            </div>
+    <div class="card">
+        <h3>Cambiar estatus de proveedor</h3>
+        <p><strong>Acción del Usuario:</strong> El gerente es capaz de modificar el estatus de un proveedor seleccionando entre Activo o Inactivo.</p>
+        <p><strong>Acción del Sistema:</strong> Actualiza el campo Estatus del proveedor en la base de datos sin eliminar el registro.</p>
+        <p><strong>Resultado:</strong> El proveedor queda inactivo y no participa en futuras operaciones, pero su historial se mantiene.</p>
+    </div>
 
-            <div class="card">
-                <h3>Cambiar estatus de proveedor</h3>
-                <p><strong>CRUD:</strong> Eliminar (lógico)</p>
-                <p><strong>Campos:</strong> Estatus (Activo/Inactivo).</p>
-                <p><strong>Resultado:</strong> El proveedor no se elimina de la BD, pero queda inactivo para futuras operaciones.</p>
-            </div>
-        </section>
+    <div class="card">
+        <h3>Asignar ingredientes a proveedor</h3>
+        <p><strong>Acción del Usuario:</strong> El gerente es capaz de seleccionar un proveedor y asignarle ingredientes indicando los campos: ID_Proveedor, ID_Ingrediente y Cantidad.</p>
+        <p><strong>Acción del Sistema:</strong> Registra la relación entre el proveedor y los ingredientes en la tabla <em>ProveedorIngrediente</em>.</p>
+        <p><strong>Resultado:</strong> El sistema guarda qué ingredientes puede surtir cada proveedor y en qué cantidades.</p>
+    </div>
 
-        <section>
-            <h2>Funciones del Empleado</h2>
+    <div class="card">
+        <h3>Consultar historial de ingredientes por proveedor</h3>
+        <p><strong>Acción del Usuario:</strong> El gerente es capaz de seleccionar un proveedor y consultar los ingredientes asignados mostrando los campos: ID_Proveedor, ID_Ingrediente y Cantidad.</p>
+        <p><strong>Acción del Sistema:</strong> Consulta la tabla <em>ProveedorIngrediente</em> y recupera los registros asociados al proveedor.</p>
+        <p><strong>Resultado:</strong> El gerente conoce los ingredientes que cada proveedor ha surtido y en qué cantidades.</p>
+    </div>
+</section>
 
-            <div class="card">
-                <h3>Crear proveedor</h3>
-                <p><strong>CRUD:</strong> Crear</p>
-                <p><strong>Campos:</strong> Nombre, ApellidoP, Teléfono, Correo, RFC_NIT.</p>
-                <p><strong>Resultado:</strong> El empleado puede registrar un proveedor básico, que luego podrá ser complementado por el gerente.</p>
-            </div>
+<section>
+    <h2>Funciones del Empleado</h2>
 
-            <div class="card">
-                <h3>Consultar proveedores</h3>
-                <p><strong>CRUD:</strong> Leer</p>
-                <p><strong>Campos:</strong> Nombre, Apellidos, Teléfono, Correo, RFC_NIT, Estatus.</p>
-                <p><strong>Resultado:</strong> El empleado puede ver la información de contacto y estado de los proveedores.</p>
-            </div>
+    <div class="card">
+        <h3>Registrar proveedor básico</h3>
+        <p><strong>Acción del Usuario:</strong> El empleado es capaz de registrar un proveedor ingresando los campos: Nombre, ApellidoP, Teléfono, Correo y RFC_NIT.</p>
+        <p><strong>Acción del Sistema:</strong> Valida y guarda la información en la base de datos como un registro preliminar.</p>
+        <p><strong>Resultado:</strong> El proveedor queda registrado con datos básicos, permitiendo que posteriormente el gerente complete la información.</p>
+    </div>
 
-        </section>
+    <div class="card">
+        <h3>Consultar proveedores</h3>
+        <p><strong>Acción del Usuario:</strong> El empleado es capaz de consultar la lista de proveedores visualizando los campos: Nombre, ApellidoP, Teléfono, Correo, RFC_NIT y Estatus.</p>
+        <p><strong>Acción del Sistema:</strong> Recupera la información básica de los proveedores desde la base de datos.</p>
+        <p><strong>Resultado:</strong> El empleado puede ver los datos de contacto y estado de los proveedores registrados.</p>
+    </div>
+
+    <div class="card">
+        <h3>Consultar ingredientes de un proveedor</h3>
+        <p><strong>Acción del Usuario:</strong> El empleado es capaz de seleccionar un proveedor y consultar los ingredientes que puede surtir, mostrando los campos: ID_Proveedor, ID_Ingrediente y Cantidad.</p>
+        <p><strong>Acción del Sistema:</strong> Consulta la tabla <em>ProveedorIngrediente</em> y lista los ingredientes asociados al proveedor.</p>
+        <p><strong>Resultado:</strong> El empleado sabe qué ingredientes se pueden solicitar a cada proveedor.</p>
+    </div>
+</section>
+
     </main>
 
     <footer>
