@@ -1,91 +1,251 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyecto Cafetería - Monky Café</title>
-  <link rel="stylesheet" href="style/style.css">
-  <!-- Fuente moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Íconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Obra - Documentación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        /* Estilos personalizados rápidos */
+        :root {
+            --primary-color: #0d47a1; /* Azul construcción */
+            --accent-color: #ffc107; /* Amarillo seguridad */
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        .card-module {
+            transition: transform 0.3s;
+            border-left: 5px solid var(--primary-color);
+        }
+        .card-module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .team-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+        }
+        .section-title {
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 
-  <header class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1>Proyecto Integrador</h1>
-      <h2>Cafetería "Monky Café"</h2>
-    </div>
-  </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="bi bi-building"></i> Nexus Obra</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#problematica">Problemática</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#objetivo">Objetivo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#modulos">Módulos del Sistema</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <main>
-    <section class="contenedor">
-      <h2>Problemática</h2>
-      <p>
-        La cafetería Monky Café enfrenta dificultades en la gestión de inventarios, 
-        ya que el control de productos e ingredientes se realiza de manera manual, 
-        lo que genera pérdidas, desabasto y errores en el registro de ventas. 
-        Además, no existe un sistema centralizado que integre la administración de 
-        compras, proveedores y reportes, dificultando la toma de decisiones.
-      </p>
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Nexus Obra</h1>
+            <p class="lead mb-4">Sistema Integral de Control Financiero y Avance de Obra</p>
+            <a href="#modulos" class="btn btn-warning btn-lg fw-bold">Ver Documentación Técnica</a>
+        </div>
+    </header>
+
+    <section id="problematica" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">La Problemática</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <p class="fs-5 text-muted">
+                        Actualmente, la gestión de proyectos de construcción sufre de una desconexión crítica entre el avance físico real y el avance financiero cobrado.
+                    </p>
+                    <ul class="list-group list-group-flush text-start mt-4 shadow-sm">
+                        <li class="list-group-item"><i class="bi bi-x-circle-fill text-danger me-2"></i> Desfase financiero (Dinero cobrado vs. Trabajo ejecutado).</li>
+                        <li class="list-group-item"><i class="bi bi-x-circle-fill text-danger me-2"></i> Retenciones de pagos por falta de documentación (REPSE/IMSS).</li>
+                        <li class="list-group-item"><i class="bi bi-x-circle-fill text-danger me-2"></i> Falta de visibilidad en tiempo real de la rentabilidad (Ingresos vs. Egresos).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="contenedor">
-      <h2>Objetivo del Proyecto</h2>
-      <p>
-        Crear un sistema integral que gestione las ventas, inventarios, compras, proveedores y reportes, con el fin de optimizar los recursos, asegurar que nunca falten ingredientes y hacer más eficientes las operaciones diarias dentro de la cafetería Monky Café, a través de una plataforma sencilla y unificada que conecte todos los procesos en un solo lugar.
-      </p>
+    <section id="objetivo" class="py-5">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Objetivo del Proyecto</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                        <div class="fs-1 text-primary mb-3"><i class="bi bi-pc-display-horizontal"></i></div>
+                        <h3 class="h4">¿Qué es?</h3>
+                        <p>Una plataforma web centralizada que integra el control operativo (campo) con el control administrativo (oficina), gestionando contratos, estimaciones y cumplimiento normativo.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                        <div class="fs-1 text-success mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                        <h3 class="h4">¿Para qué?</h3>
+                        <p>Para asegurar la rentabilidad de la obra, eliminar atrasos en cobros, evitar penalizaciones por falta de documentos y brindar transparencia total al Director sobre el estado del proyecto.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                        <div class="fs-1 text-warning mb-3"><i class="bi bi-gear-wide-connected"></i></div>
+                        <h3 class="h4">¿Cómo funciona?</h3>
+                        <p>Mediante una base de datos relacional unificada donde el Residente reporta avances físicos, el Administrador genera estimaciones basadas en contratos, y el sistema calcula automáticamente el balance financiero.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="contenedor modulos">
-  <h2>Módulos del Sistema</h2>
-  <p>A continuación se presentan los módulos principales del sistema:</p>
-  <img src="assets/Cafeteria.png" alt="Módulos del sistema de la cafetería">
+    <section id="modulos" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Módulos y Estructura de Datos</h2>
+                <p>Selecciona un módulo para ver el detalle de tablas, usuarios y funciones.</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-module h-100">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="bi bi-shield-lock"></i> 1. Núcleo y Proyectos</h5>
+                            <p class="card-text small text-muted">Gestión de usuarios, roles y alta de obras.</p>
+                            <hr>
+                            <ul class="small list-unstyled">
+                                <li><strong>Tablas:</strong> Usuarios, Roles, Proyectos.</li>
+                                <li><strong>Usuario:</strong> Admin Global.</li>
+                            </ul>
+                            <a href="Modulos/modulo1.html" class="btn btn-outline-primary btn-sm w-100 mt-2">Ver Funcionalidad</a>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="grid-botones">
-    <a href="AnalisiDeVentas/Principal.html" class="card">
-      <i class="fa-solid fa-chart-line"></i><span>Análisis de Venta</span>
-    </a>
-    <a href="marketing.html" class="card">
-      <i class="fa-solid fa-bullhorn"></i><span>Marketing</span>
-    </a>
-    <a href="personal.html" class="card">
-      <i class="fa-solid fa-user-group"></i><span>Personal</span>
-    </a>
-    <a href="ventas.html" class="card">
-      <i class="fa-solid fa-cash-register"></i><span>Ventas</span>
-    </a>
-    <a href="ingredientes.html" class="card">
-      <i class="fa-solid fa-apple-whole"></i><span>Ingredientes</span>
-    </a>
-    <a href="Proveedores/Principal.html" class="card">
-      <i class="fa-solid fa-truck"></i><span>Proveedores</span>
-    </a>
-    <a href="inventario.html" class="card">
-      <i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span>
-    </a>
-    <a href="facturacion.html" class="card">
-      <i class="fa-solid fa-file-invoice-dollar"></i><span>Facturación</span>
-    </a>
-    <a href="carta.html" class="card">
-      <i class="fa-solid fa-mug-hot"></i><span>Carta</span>
-    </a>
-    <a href="seguridad.html" class="card">
-      <i class="fa-solid fa-lock"></i><span>Seguridad</span>
-    </a>
-    <a href="membresia.html" class="card">
-      <i class="fa-solid fa-id-card"></i><span>Membresía</span>
-    </a>
-  </div>
-</section>
+                <div class="col-md-4">
+                    <div class="card card-module h-100">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="bi bi-file-earmark-text"></i> 2. Contratos y Presupuesto</h5>
+                            <p class="card-text small text-muted">Carga de contratos, addendums y catálogo de conceptos.</p>
+                            <hr>
+                            <ul class="small list-unstyled">
+                                <li><strong>Tablas:</strong> Contratos, Conceptos, Modificaciones.</li>
+                                <li><strong>Usuario:</strong> Administrador.</li>
+                            </ul>
+                            <a href="Modulos/modulo2.html" class="btn btn-outline-primary btn-sm w-100 mt-2">Ver Funcionalidad</a>
+                        </div>
+                    </div>
+                </div>
 
-  </main>
+                <div class="col-md-4">
+                    <div class="card card-module h-100">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="bi bi-cone-striped"></i> 3. Residente (Ejecución)</h5>
+                            <p class="card-text small text-muted">Reporte de avance físico desde obra.</p>
+                            <hr>
+                            <ul class="small list-unstyled">
+                                <li><strong>Tablas:</strong> Avance_Real, Egresos.</li>
+                                <li><strong>Usuario:</strong> Residente de Obra.</li>
+                            </ul>
+                            <a href="Modulos/modulo3.html" class="btn btn-outline-primary btn-sm w-100 mt-2">Ver Funcionalidad</a>
+                        </div>
+                    </div>
+                </div>
 
-  <footer>
-    <p>Proyecto escolar - Monky Café © 2025</p>
-  </footer>
+                <div class="col-md-6">
+                    <div class="card card-module h-100">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="bi bi-cash-coin"></i> 4. Estimaciones y Compliance</h5>
+                            <p class="card-text small text-muted">Generación de cobros, flujo de aprobación y gestión de documentos REPSE.</p>
+                            <hr>
+                            <ul class="small list-unstyled">
+                                <li><strong>Tablas:</strong> Estimaciones, Detalle_Estimacion, Retenciones, Compliance.</li>
+                                <li><strong>Usuario:</strong> Administrador.</li>
+                            </ul>
+                            <a href="Modulos/modulo4.html" class="btn btn-outline-primary btn-sm w-100 mt-2">Ver Funcionalidad</a>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-md-6">
+                    <div class="card card-module h-100">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="bi bi-bar-chart-line"></i> 5. Dashboard Ejecutivo</h5>
+                            <p class="card-text small text-muted">Visualización de KPIs, Balance Financiero y alertas de rentabilidad.</p>
+                            <hr>
+                            <ul class="small list-unstyled">
+                                <li><strong>Tablas:</strong> (Lectura de todas las anteriores).</li>
+                                <li><strong>Usuario:</strong> Director.</li>
+                            </ul>
+                            <a href="Modulos/modulo5.html" class="btn btn-outline-primary btn-sm w-100 mt-2">Ver Funcionalidad</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Equipo de Desarrollo</h2>
+            </div>
+            <div class="row justify-content-center text-center g-4">
+                <div class="col-md-2 col-sm-4">
+                    <img src="https://via.placeholder.com/150" alt="Foto Integrante 1" class="rounded-circle team-img mb-3">
+                    <h5 class="fw-bold">Isai Montaño Chavez</h5>
+                    <p class="small text-muted">Núcleo y BD</p>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <img src="https://via.placeholder.com/150" alt="Foto Integrante 2" class="rounded-circle team-img mb-3">
+                    <h5 class="fw-bold">Leilany Aislinn Sanchez Reyes</h5>
+                    <p class="small text-muted">Contratos</p>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <img src="https://via.placeholder.com/150" alt="Foto Integrante 3" class="rounded-circle team-img mb-3">
+                    <h5 class="fw-bold">Galilea Alonzo Hernández</h5>
+                    <p class="small text-muted">Residente</p>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <img src="https://via.placeholder.com/150" alt="Foto Integrante 4" class="rounded-circle team-img mb-3">
+                    <h5 class="fw-bold">Xavier Amed Guerrero Hernández</h5>
+                    <p class="small text-muted">Estimaciones</p>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <img src="https://via.placeholder.com/150" alt="Foto Integrante 5" class="rounded-circle team-img mb-3">
+                    <h5 class="fw-bold">Daniel López Gonzales </h5>
+                    <p class="small text-muted">Dashboard</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Nexus Obra. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

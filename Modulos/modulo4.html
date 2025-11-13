@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: Estimaciones y Compliance - Nexus Obra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --admin-color: #198754;
+            --director-color: #fd7e14;
+            --resident-color: #0dcaf0;
+            --db-color: #6c757d;
+            --money-color: #20c997; /* Color especial para este módulo */
+        }
+        body { background-color: #f8f9fa; }
+        
+        .header-module {
+            background: linear-gradient(135deg, var(--admin-color), var(--money-color));
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+            border-bottom: 5px solid var(--db-color);
+        }
+
+        .role-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .role-card:hover { transform: translateY(-5px); }
+        .role-icon { font-size: 3rem; margin-bottom: 1rem; }
+        
+        /* Bordes por rol */
+        .card-admin { border-top: 5px solid var(--admin-color); }
+        .icon-admin { color: var(--admin-color); }
+        
+        .card-director { border-top: 5px solid var(--director-color); }
+        .icon-director { color: var(--director-color); }
+        
+        .card-resident { border-top: 5px solid var(--resident-color); }
+        .icon-resident { color: var(--resident-color); }
+
+        /* Estilos para la sección de BD */
+        .table-db {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+        .pk-key { color: #d63384; font-weight: bold; } 
+        .fk-key { color: #0d6efd; font-weight: bold; } 
+        .card-db {
+            border-left: 4px solid var(--db-color);
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html"><i class="bi bi-arrow-left-circle"></i> Volver al Inicio</a>
+            <span class="navbar-text text-white">Módulo 4: Finanzas</span>
+        </div>
+    </nav>
+
+    <header class="header-module text-center">
+        <div class="container">
+            <span class="badge bg-light text-dark mb-2">Control Financiero y Legal</span>
+            <h1 class="display-4 fw-bold"><i class="bi bi-cash-coin"></i> Módulo 4: Estimaciones y Compliance</h1>
+            <p class="lead mb-4">Generación de cobros, flujo de aprobación y gestión de retenciones (REPSE).</p>
+            
+            <a href="#estructura-bd" class="btn btn-light btn-lg fw-bold shadow">
+                <i class="bi bi-database-fill-gear"></i> Ver Tablas de Base de Datos
+            </a>
+        </div>
+    </header>
+
+    <div class="container mb-5">
+        
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-10">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h3 class="text-success fw-bold mb-3"><i class="bi bi-bullseye"></i> Objetivo del Módulo</h3>
+                        <p class="fs-5">
+                            Este es el "cajero" del sistema. Su objetivo es transformar los <strong>Avances Reales</strong> (reportados en campo) en <strong>Estimaciones</strong> (Facturas) para cobro.
+                            <br><br>
+                            Además, gestiona el riesgo legal mediante el módulo de <strong>Compliance (REPSE/IMSS)</strong>. Si falta un documento, el sistema registra automáticamente las <strong>Retenciones</strong> aplicadas al pago, permitiendo al Director saber por qué no está entrando dinero.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-4 text-center fw-bold">Funcionalidad por Tipo de Usuario</h3>
+
+        <div class="row g-4 mb-5">
+            
+            <div class="col-lg-4">
+                <div class="card role-card card-admin p-3">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <i class="bi bi-person-gear role-icon icon-admin"></i>
+                            <h4 class="card-title fw-bold">El Administrador</h4>
+                            <span class="badge bg-success mb-3">Gestión Financiera</span>
+                        </div>
+                        <p class="card-text">Encargado de armar las estimaciones y asegurar el cumplimiento legal.</p>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Crear Estimación:</strong> Seleccionar avances disponibles ("Carrito de compras") y generar la estimación.
+                                <br><span class="db-badge">INSERT INTO Estimaciones</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Gestión Documental:</strong> Subir documentos (REPSE, IMSS) y monitorear vencimientos.
+                                <br><span class="db-badge">INSERT INTO Compliance</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Registrar Retenciones:</strong> Anotar si el cliente retuvo dinero y el motivo (Ej. "Falta REPSE").
+                                <br><span class="db-badge">INSERT INTO Retenciones</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card role-card card-director p-3">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <i class="bi bi-person-video3 role-icon icon-director"></i>
+                            <h4 class="card-title fw-bold">El Director</h4>
+                            <span class="badge bg-warning text-dark mb-3">Aprobación y Riesgo</span>
+                        </div>
+                        <p class="card-text">Supervisa el flujo de caja y los bloqueos por cumplimiento.</p>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Aprobar Flujo:</strong> Ver estimaciones en estatus "Revisión" y autorizar su envío.
+                                <br><span class="db-badge">UPDATE Estimaciones SET Status='Liberado'</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Monitor de Retenciones:</strong> Ver cuánto dinero está "congelado" por faltas administrativas.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card role-card card-resident p-3">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <i class="bi bi-helmet role-icon icon-resident"></i>
+                            <h4 class="card-title fw-bold">El Residente</h4>
+                            <span class="badge bg-info text-dark mb-3">Consulta</span>
+                        </div>
+                        <p class="card-text">Solo verifica que su trabajo haya sido procesado.</p>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Estatus de Avance:</strong> Ver si sus reportes ya pasaron de "Reportado" a "Estimado" (Cobrado).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <hr class="my-5">
+        
+        <section id="estructura-bd" class="pt-4">
+            <div class="text-center mb-4">
+                <span class="badge bg-secondary">Back-End</span>
+                <h2 class="fw-bold"><i class="bi bi-database"></i> Tablas del Módulo</h2>
+                <p class="text-muted">Estructura compleja para manejo de dinero y relaciones N a N.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card card-db shadow-sm h-100">
+                        <div class="card-header bg-white fw-bold border-bottom-0">
+                            <i class="bi bi-table text-primary"></i> Tabla: Estimaciones
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-sm table-db mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Columna</th><th>Tipo</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><span class="pk-key">ID_Estimacion</span></td><td>INT (PK)</td><td>-</td></tr>
+                                    <tr><td>Numero_Est</td><td>NVARCHAR</td><td>Folio (Est-01)</td></tr>
+                                    <tr><td>Monto_Total</td><td>DECIMAL</td><td>Suma total</td></tr>
+                                    <tr><td>Status_Residencia</td><td>NVARCHAR</td><td>'Revision', 'Liberado'</td></tr>
+                                    <tr><td>Estatus_Pago</td><td>NVARCHAR</td><td>'Pendiente', 'Pagada'</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-db shadow-sm h-100">
+                        <div class="card-header bg-white fw-bold border-bottom-0">
+                            <i class="bi bi-table text-primary"></i> Tabla: Estimacion_Detalle
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-sm table-db mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Columna</th><th>Tipo</th><th>Nota</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><span class="pk-key">ID_Detalle</span></td><td>INT (PK)</td><td>-</td></tr>
+                                    <tr><td><span class="fk-key">ID_Estimacion</span></td><td>INT (FK)</td><td>Link a cabecera</td></tr>
+                                    <tr><td><span class="fk-key">ID_Avance_Real</span></td><td>INT (FK)</td><td>Link a lo reportado en campo</td></tr>
+                                    <tr><td>Monto_Estimado</td><td>DECIMAL</td><td>Dinero de este item específico</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-db shadow-sm h-100">
+                        <div class="card-header bg-white fw-bold border-bottom-0">
+                            <i class="bi bi-file-earmark-check text-primary"></i> Tabla: Compliance_REPSE
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-sm table-db mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Columna</th><th>Tipo</th><th>Nota</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><span class="pk-key">ID_Compliance</span></td><td>INT (PK)</td><td>-</td></tr>
+                                    <tr><td>Tipo_Documento</td><td>NVARCHAR</td><td>'Alta IMSS', 'REPSE'</td></tr>
+                                    <tr><td>Fecha_Vencimiento</td><td>DATE</td><td>Para alertas</td></tr>
+                                    <tr><td>Estatus_Doc</td><td>NVARCHAR</td><td>'Vigente', 'Vencido', 'Faltante'</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-db shadow-sm h-100">
+                        <div class="card-header bg-white fw-bold border-bottom-0">
+                            <i class="bi bi-dash-circle text-danger"></i> Tabla: Retenciones
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-sm table-db mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Columna</th><th>Tipo</th><th>Nota</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><span class="pk-key">ID_Retencion</span></td><td>INT (PK)</td><td>-</td></tr>
+                                    <tr><td><span class="fk-key">ID_Estimacion</span></td><td>INT (FK)</td><td>Opcional (si es por est)</td></tr>
+                                    <tr><td>Monto_Retenido</td><td>DECIMAL</td><td>Dinero descontado</td></tr>
+                                    <tr><td>Motivo</td><td>NVARCHAR</td><td>La razón del descuento</td></tr>
+                                    <tr><td>Estatus</td><td>NVARCHAR</td><td>'Activa', 'Liberada'</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Nexus Obra - Documentación Interna</p>
+        </div>
+    </footer>
+
+</body>
+</html>
